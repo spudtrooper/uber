@@ -1,0 +1,16 @@
+[
+  {
+    "Handler": "GetStatus",
+    "Loc": {
+      "uri": "github.com/spudtrooper/uber/blob/main/handlers/handlers.go",
+      "line": 19
+    }
+  },
+  {
+    "Handler": "GetUser",
+    "Loc": {
+      "uri": "github.com/spudtrooper/uber/blob/main/handlers/handlers.go",
+      "line": 28
+    }
+  }
+]

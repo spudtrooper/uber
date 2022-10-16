@@ -34,5 +34,14 @@ func CreateHandlers(client *api.Client) []handler.Handler {
 		handler.NewHandlerExtraRequiredFields([]string{"sid", "csid"}),
 	)
 
+	b.NewHandler("Trips",
+		func(ctx context.Context, ip any) (any, error) {
+			p := ip.(api.TripsParams)
+			return client.Trips(p.Options()...)
+		},
+		api.TripsParams{},
+		handler.NewHandlerExtraRequiredFields([]string{"sid", "csid"}),
+	)
+
 	return b.Build()
 }

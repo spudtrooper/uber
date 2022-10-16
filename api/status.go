@@ -71,10 +71,16 @@ func (c *Client) Status(optss ...StatusOption) (*getStatusInfo, error) {
 	opts := MakeStatusOptions(optss...)
 
 	uri := request.MakeURL("https://m.uber.com/api/getStatus",
-		request.Param{"localeCode", opts.LocaleCode()},
+		request.MakeParam("localeCode", opts.LocaleCode()),
 	)
-
-	headers := c.makeHeaders(true, opts.ToBaseOptions()...)
+	headers := c.withAuth(map[string]string{
+		"authority":       `m.uber.com`,
+		"accept":          `*/*`,
+		"accept-language": `en-US,en;q=0.9`,
+		"cache-control":   `no-cache`,
+		"content-type":    `application/json`,
+		"x-csrf-token":    `x`,
+	}, opts.ToBaseOptions()...)
 
 	type body struct {
 		Latitude  float64 `json:"latitude"`

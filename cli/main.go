@@ -2,6 +2,7 @@ package cli
 
 import (
 	"context"
+	"flag"
 
 	"github.com/spudtrooper/minimalcli/handler"
 	"github.com/spudtrooper/uber/api"
@@ -9,12 +10,7 @@ import (
 )
 
 func Main(ctx context.Context) error {
-	// flag.Float64("lat", 0, "latitude")
-	// flag.Float64("lng", 0, "longitude")
-	// flag.Int("accuracy", 0, "accuracy")
-	// flag.Int("limit", 0, "limit")
-	// flag.Duration("timeout", 0, "timeout")
-	// flag.Bool("debug", false, "debug")
+	flag.String("cursor", "", "cursor")
 
 	client, err := api.NewClientFromFlags()
 	if err != nil {

@@ -23,9 +23,14 @@ type getUserInfo struct {
 func (c *Client) User(optss ...UserOption) (*getUserInfo, error) {
 	opts := MakeUserOptions(optss...)
 
-	const uri = "https://m.uber.com/graphql"
+	const uri = "https://riders.uber.com/graphql"
 
-	headers := c.makeHeaders(true, opts.ToBaseOptions()...)
+	headers := c.withAuth(map[string]string{
+		"authority":     `riders.uber.com`,
+		"cache-control": `no-cache`,
+		"content-type":  `application/json`,
+		"x-csrf-token":  `x`,
+	}, opts.ToBaseOptions()...)
 
 	type variables struct {
 	}
@@ -38,7 +43,7 @@ func (c *Client) User(optss ...UserOption) (*getUserInfo, error) {
 	b, err := request.JSONMarshal(body{
 		OperationName: "GetUser",
 		Variables:     variables{},
-		Query:         "query GetUser {user {\n    ...UserFragment\n    __typename\n  }\n}\n\nfragment UserFragment on User {\n  user {\n    firstName\n    lastSelectedPaymentProfileUuid\n    pictureUrl\n    tenancy\n    __typename\n  }\n  uuid\n  __typename\n}\n",
+		Query:         "query GetUser {\n  user {\n    ...UserFragment\n    __typename\n  }\n}\n\nfragment UserFragment on User {\n  user {\n    alternateEmails {\n      email\n      paymentProfileUuid\n      __typename\n    }\n    email\n    firstName\n    formattedNumber\n    languageId\n    lastName\n    pictureUrl\n    role\n    signupCountry\n    tenancy\n    __typename\n  }\n  __typename\n}\n",
 	})
 	if err != nil {
 		return nil, err

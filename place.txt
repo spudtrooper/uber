@@ -1,14 +1,14 @@
-curl 'https://riders.uber.com/graphql' \
-  -H 'authority: riders.uber.com' \
+curl 'https://m.uber.com/api/getStatus?localeCode=en' \
+  -H 'authority: m.uber.com' \
   -H 'accept: */*' \
   -H 'accept-language: en-US,en;q=0.9' \
   -H 'cache-control: no-cache' \
   -H 'content-type: application/json' \
-  -H 'cookie: marketing_vistor_id=5145623a-7713-4213-9a5b-4330c4fff064; segmentCookie=b; utag_geo_code=US; _gcl_au=1.1.1812037979.1664022568; UBER_CONSENTMGR=1664022585681|consent:true; CONSENTMGR=c1:1%7Cc2:1%7Cc3:1%7Cc4:1%7Cc5:1%7Cc6:1%7Cc7:1%7Cc8:1%7Cc9:1%7Cc10:1%7Cc11:1%7Cc12:1%7Cc13:1%7Cc14:1%7Cc15:1%7Cts:1664022585681%7Cconsent:true; usl_rollout_id=258f4f62-8687-4fcf-b929-9a5bb14d6127; sid=QA.CAESEHZN2t12XEjErN2zmZJjetkYx87bmgYiATEqJGE1M2U3YjEzLWU3ZDUtNGUzOC1hNjkzLTIzZWE5OWQ1NGUxZTI8wtE-vk6V_bi-YtHwVKQ2T3OdWzVFCrn8yWbkeiv2A6xnNqQ_r4xR3TCNThgt7BCG_YbcMdK-sT5AwdorOgExQgh1YmVyLmNvbQ.o8YCgsyXIVWuuGjYuO1X7G0PqLXhuBK0GlLNYEgC_yI; _gid=GA1.2.514126880.1665880896; _ga=GA1.2.180558629.1664022568; utag_main=v_id:01836f7953a900075825d7b3bbaa05075001506d00ac8$_sn:4$_se:2$_ss:0$_st:1665924041278$segment:b$optimizely_segment:a$ses_id:1665922239306%3Bexp-session$_pn:1%3Bexp-session; _ga_XTGQLY6KPT=GS1.1.1665922239.4.1.1665922244.0.0.0; x-uber-analytics-session-id=57e0dfd8-da30-4c19-8742-cdea005d64cb; csid=1.1668515875704.KeAInu4+GdZPH+y1XoapdTsC0V4AULs1dOG05K8/itE=; _ua={"session_id":"ff403617-efc8-4596-859a-b7f674ae0696","session_time_ms":1665923875809}; jwt-session=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NjU5MjM4NzUsImV4cCI6MTY2NjAxMDI3NX0.2uOLgkW4OH-YG5TE9zRjOX1ZESilUtJ5qMPNGuyohRk; optimizelyEndUserId=oeu1665923875921r0.31827434167484703' \
+  -H 'cookie: marketing_vistor_id=5145623a-7713-4213-9a5b-4330c4fff064; segmentCookie=b; utag_geo_code=US; _gcl_au=1.1.1812037979.1664022568; UBER_CONSENTMGR=1664022585681|consent:true; CONSENTMGR=c1:1%7Cc2:1%7Cc3:1%7Cc4:1%7Cc5:1%7Cc6:1%7Cc7:1%7Cc8:1%7Cc9:1%7Cc10:1%7Cc11:1%7Cc12:1%7Cc13:1%7Cc14:1%7Cc15:1%7Cts:1664022585681%7Cconsent:true; usl_rollout_id=258f4f62-8687-4fcf-b929-9a5bb14d6127; udi-id=vcgecsZHYwbuNu/fBNbUOQX2HTG8ic4z9OGB+fsMpXW1URTvfCz8efEkQ6yAAFL7xYnMwcExFdQ0GV6s+W/P3ZY/2sIOKY/AV9LYaKEWYDGbS/NKHtR1QQ6hGrp9t8DeWbKKls9Ul3OCvLxYJK5xIGwXwQr0+wsyiAQDr3BaeiTwEUOnUe3Z90lmRsLGQ8iEeHoh8ADz4nCdPCM9+CuDoA==lwL64oU5HE6wFkL9I1WRrQ==2jBu1AW3IPwukPcaP/+XzRFCR3Y4Bo5NTiyntBRa/tY=; _cc=Aa9RuMTSjK%2FuzJPgKFwpRS%2B9; sid=QA.CAESEHZN2t12XEjErN2zmZJjetkYx87bmgYiATEqJGE1M2U3YjEzLWU3ZDUtNGUzOC1hNjkzLTIzZWE5OWQ1NGUxZTI8wtE-vk6V_bi-YtHwVKQ2T3OdWzVFCrn8yWbkeiv2A6xnNqQ_r4xR3TCNThgt7BCG_YbcMdK-sT5AwdorOgExQgh1YmVyLmNvbQ.o8YCgsyXIVWuuGjYuO1X7G0PqLXhuBK0GlLNYEgC_yI; _gid=GA1.2.514126880.1665880896; csid=1.1668472902282.vyd8lD9nfJwioD11SIPpt0uXsdzl10lBU1kxUaAFb8o=; _ua={"session_id":"443d9c0d-36ca-4802-bca8-3b2c2dcd1787","session_time_ms":1665880904070}; jwt-session=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InNlc3Npb25fdHlwZSI6ImRlc2t0b3Bfc2Vzc2lvbiIsInRlbmFuY3kiOiJ1YmVyL3Byb2R1Y3Rpb24ifSwiaWF0IjoxNjY1ODgwOTA0LCJleHAiOjE2NjU5NjczMDR9.uev6QlDlTI16FmJdgmf3oCLL8Yw3GtIMRRPh1UWQOKA; allow-geolocation=true; _ga=GA1.2.180558629.1664022568; utag_main=v_id:01836f7953a900075825d7b3bbaa05075001506d00ac8$_sn:4$_se:2$_ss:0$_st:1665924041278$segment:b$optimizely_segment:a$ses_id:1665922239306%3Bexp-session$_pn:1%3Bexp-session; _ga_XTGQLY6KPT=GS1.1.1665922239.4.1.1665922244.0.0.0; udi-fingerprint=p6KcpirZEkggaQyYxfMhFbaWdxrfWS5LE9Zn5ptEQJb5jPK4UZ0jQLkLxDxxyiGn4R5NALhpg4H1OvLThreZqg==WFkH+VsIHmmdu1A3/zC83bFL4pVZSPd3O/yH26DxfA8=' \
   -H 'dnt: 1' \
-  -H 'origin: https://riders.uber.com' \
+  -H 'origin: https://m.uber.com' \
   -H 'pragma: no-cache' \
-  -H 'referer: https://riders.uber.com/trips?_csid=drPJ2dLBKgCsSVKbKwiA8w&state=wluDzbQy5dF7Nt9sn7mzjmhrdv_vYfMoFgvWpECuIqI%3D&effect=' \
+  -H 'referer: https://m.uber.com/looking' \
   -H 'sec-ch-ua: "Google Chrome";v="105", "Not)A;Brand";v="8", "Chromium";v="105"' \
   -H 'sec-ch-ua-mobile: ?0' \
   -H 'sec-ch-ua-platform: "macOS"' \
@@ -17,5 +17,6 @@ curl 'https://riders.uber.com/graphql' \
   -H 'sec-fetch-site: same-origin' \
   -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36' \
   -H 'x-csrf-token: x' \
-  --data-raw '{"operationName":"GetTrips","variables":{"cursor":"","fromTime":null,"toTime":null},"query":"query GetTrips($cursor: String, $fromTime: Float, $toTime: Float) {\n  getTrips(cursor: $cursor, fromTime: $fromTime, toTime: $toTime) {\n    count\n    pagingResult {\n      hasMore\n      nextCursor\n      __typename\n    }\n    reservations {\n      ...TripFragment\n      __typename\n    }\n    trips {\n      ...TripFragment\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment TripFragment on Trip {\n  beginTripTime\n  disableCanceling\n  driver\n  dropoffTime\n  fare\n  isRidepoolTrip\n  isScheduledRide\n  isSurgeTrip\n  isUberReserve\n  jobUUID\n  marketplace\n  paymentProfileUUID\n  status\n  uuid\n  vehicleDisplayName\n  waypoints\n  __typename\n}\n"}' \
+  -H 'x-uber-wa-info: TSGFOONJHKJLJHHGGGPMTRLK' \
+  --data-raw '{"latitude":40.7700742,"longitude":-73.9829869}' \
   --compressed

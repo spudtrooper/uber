@@ -109,40 +109,16 @@ func readCreds(credsFile string) (creds Creds, ret error) {
 	return
 }
 
-func (c *Client) makeHeaders(auth bool, optss ...BaseOption) map[string]string {
+func (c *Client) withAuth(headers map[string]string, optss ...BaseOption) map[string]string {
 	opts := MakeBaseOptions(optss...)
 
-	headers := map[string]string{
-		"authority":          `m.uber.com`,
-		"accept":             `*/*`,
-		"accept-language":    `en-US,en;q=0.9`,
-		"cache-control":      `no-cache`,
-		"content-type":       `application/json`,
-		"dnt":                `1`,
-		"origin":             `https://m.uber.com`,
-		"pragma":             `no-cache`,
-		"referer":            `https://m.uber.com/looking`,
-		"sec-ch-ua":          `"Google Chrome";v="105", "Not)A;Brand";v="8", "Chromium";v="105"`,
-		"sec-ch-ua-mobile":   `?0`,
-		"sec-ch-ua-platform": `"macOS"`,
-		"sec-fetch-dest":     `empty`,
-		"sec-fetch-mode":     `cors`,
-		"sec-fetch-site":     `same-origin`,
-		"user-agent":         `Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36`,
-		"x-csrf-token":       `x`,
-		"cookie": request.CreateCookie([][2]string{
-			{"allow-geolocation", `true`},
-		}),
-	}
-	if auth {
-		sid := or.String(opts.Sid(), c.sid)
-		csid := or.String(opts.Csid(), c.csid)
-		headers["cookie"] = request.CreateCookie([][2]string{
-			{"sid", sid},
-			{"csid", csid},
-			{"allow-geolocation", `true`},
-		})
-	}
+	sid := or.String(opts.Sid(), c.sid)
+	csid := or.String(opts.Csid(), c.csid)
+	headers["cookie"] = request.CreateCookie([][2]string{
+		{"sid", sid},
+		{"csid", csid},
+		{"allow-geolocation", `true`},
+	})
 
 	return headers
 }

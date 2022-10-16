@@ -3,6 +3,7 @@ package render
 import (
 	"bytes"
 	_ "embed"
+	"sort"
 
 	"github.com/spudtrooper/uber/api"
 )
@@ -52,6 +53,7 @@ func Status(p any) ([]byte, error) {
 			IsNearby:        isNearby,
 		})
 	}
+	sort.Slice(vehicleViews, func(i, j int) bool { return vehicleViews[i].ID < vehicleViews[j].ID })
 	var data = struct {
 		// NearbyVehicles []nearbyVehicle
 		VehicleViews []vehicleView

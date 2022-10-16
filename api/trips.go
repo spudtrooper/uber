@@ -54,8 +54,8 @@ func (c *Client) Trips(optss ...TripsOption) (*getTripsInfo, error) {
 
 	type variables struct {
 		Cursor   string `json:"cursor"`
-		FromTime int    `json:"fromTime"`
-		ToTime   int    `json:"toTime"`
+		FromTime int64  `json:"fromTime"`
+		ToTime   int64  `json:"toTime"`
 	}
 	type body struct {
 		OperationName string    `json:"operationName"`
@@ -64,14 +64,19 @@ func (c *Client) Trips(optss ...TripsOption) (*getTripsInfo, error) {
 	}
 
 	vars := variables{
-		Cursor:   opts.Cursor(),
-	},
-
+		Cursor: opts.Cursor(),
+	}
+	if !opts.FromTime().IsZero() {
+		vars.FromTime = opts.FromTime().UnixMilli()
+	}
+	if !opts.ToTime().IsZero() {
+		vars.ToTime = opts.ToTime().UnixMilli()
+	}
 
 	b, err := request.JSONMarshal(body{
 		OperationName: "GetTrips",
-		Variables: vars
-		Query: "query GetTrips($cursor: String, $fromTime: Float, $toTime: Float) {\n  getTrips(cursor: $cursor, fromTime: $fromTime, toTime: $toTime) {\n    count\n    pagingResult {\n      hasMore\n      nextCursor\n      __typename\n    }\n    reservations {\n      ...TripFragment\n      __typename\n    }\n    trips {\n      ...TripFragment\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment TripFragment on Trip {\n  beginTripTime\n  disableCanceling\n  driver\n  dropoffTime\n  fare\n  isRidepoolTrip\n  isScheduledRide\n  isSurgeTrip\n  isUberReserve\n  jobUUID\n  marketplace\n  paymentProfileUUID\n  status\n  uuid\n  vehicleDisplayName\n  waypoints\n  __typename\n}\n",
+		Variables:     vars,
+		Query:         "query GetTrips($cursor: String, $fromTime: Float, $toTime: Float) {\n  getTrips(cursor: $cursor, fromTime: $fromTime, toTime: $toTime) {\n    count\n    pagingResult {\n      hasMore\n      nextCursor\n      __typename\n    }\n    reservations {\n      ...TripFragment\n      __typename\n    }\n    trips {\n      ...TripFragment\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment TripFragment on Trip {\n  beginTripTime\n  disableCanceling\n  driver\n  dropoffTime\n  fare\n  isRidepoolTrip\n  isScheduledRide\n  isSurgeTrip\n  isUberReserve\n  jobUUID\n  marketplace\n  paymentProfileUUID\n  status\n  uuid\n  vehicleDisplayName\n  waypoints\n  __typename\n}\n",
 	})
 	if err != nil {
 		return nil, err

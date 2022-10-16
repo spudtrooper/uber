@@ -1,16 +1,16 @@
 [
   {
+    "Handler": "AllTrips",
+    "Loc": {
+      "uri": "github.com/spudtrooper/uber/blob/main/handlers/handlers.go",
+      "line": 46
+    }
+  },
+  {
     "Handler": "Status",
     "Loc": {
       "uri": "github.com/spudtrooper/uber/blob/main/handlers/handlers.go",
       "line": 19
-    }
-  },
-  {
-    "Handler": "User",
-    "Loc": {
-      "uri": "github.com/spudtrooper/uber/blob/main/handlers/handlers.go",
-      "line": 28
     }
   },
   {
@@ -21,10 +21,10 @@
     }
   },
   {
-    "Handler": "AllTrips",
+    "Handler": "User",
     "Loc": {
       "uri": "github.com/spudtrooper/uber/blob/main/handlers/handlers.go",
-      "line": 46
+      "line": 28
     }
   }
 ]

@@ -30,15 +30,15 @@
       </thead>
       <tbody>
         {{- range .VehicleViews }}
-          <tr>
-            <td>{{.ID}}</td>
-            <td>{{.IsNearby}}</td>
-            <td>{{.Lat}}</td>
-            <td>{{.Lng}}</td>
-            <td><img src="{{.ImageURL}}" alt="Image of {{.ID}}" width="80" height="80"></td>
-            <td>{{.Description}}</td>
-            <td>{{.FullDescription}}</td>
-          </tr>
+        <tr>
+          <td>{{.ID}}</td>
+          <td>{{.IsNearby}}</td>
+          <td>{{.Lat}}</td>
+          <td>{{.Lng}}</td>
+          <td><img src="{{.ImageURL}}" alt="Image of {{.ID}}" width="80" height="80"></td>
+          <td>{{.Description}}</td>
+          <td>{{.FullDescription}}</td>
+        </tr>
         {{- end }}
       </tbody>
     </table>

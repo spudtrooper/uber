@@ -14,17 +14,6 @@ var statusTmpl string
 func Status(p any) ([]byte, error) {
 	d := p.(*api.StatusInfo)
 
-	// type nearbyVehicle struct {
-	// 	Lat float64
-	// 	Lng float64
-	// }
-	// nearbyVehicles []nearbyVehicle
-	// for _, v := range d.Eyeball.NearbyVehicles {
-	// 	nearbyVehicles = append(nearbyVehicles, nearbyVehicle{
-	// 		Lat: v.Vehicle.Latitude,
-	// 		Lng: v.Vehicle.Longitude,
-	// 	})
-	// }
 	type vehicleView struct {
 		ID              string
 		Description     string
@@ -55,10 +44,8 @@ func Status(p any) ([]byte, error) {
 	}
 	sort.Slice(vehicleViews, func(i, j int) bool { return vehicleViews[i].ID < vehicleViews[j].ID })
 	var data = struct {
-		// NearbyVehicles []nearbyVehicle
 		VehicleViews []vehicleView
 	}{
-		// NearbyVehicles: nearbyVehicles,
 		VehicleViews: vehicleViews,
 	}
 	var buf bytes.Buffer

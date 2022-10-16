@@ -1,6 +1,8 @@
 // DO NOT EDIT MANUALLY: Generated from https://github.com/spudtrooper/genopts
 package api
 
+import "time"
+
 type AllTripsBatchOption func(*allTripsBatchOptionImpl)
 
 type AllTripsBatchOptions interface {
@@ -12,6 +14,10 @@ type AllTripsBatchOptions interface {
 	HasCsid() bool
 	Cursor() string
 	HasCursor() bool
+	FromTime() time.Time
+	HasFromTime() bool
+	ToTime() time.Time
+	HasToTime() bool
 	ToAllTripsOptions() []AllTripsOption
 	ToBaseOptions() []BaseOption
 	ToTripsOptions() []TripsOption
@@ -81,31 +87,73 @@ func AllTripsBatchCursorFlag(cursor *string) AllTripsBatchOption {
 	}
 }
 
-type allTripsBatchOptionImpl struct {
-	debug      bool
-	has_debug  bool
-	sid        string
-	has_sid    bool
-	csid       string
-	has_csid   bool
-	cursor     string
-	has_cursor bool
+func AllTripsBatchFromTime(fromTime time.Time) AllTripsBatchOption {
+	return func(opts *allTripsBatchOptionImpl) {
+		opts.has_fromTime = true
+		opts.fromTime = fromTime
+	}
+}
+func AllTripsBatchFromTimeFlag(fromTime *time.Time) AllTripsBatchOption {
+	return func(opts *allTripsBatchOptionImpl) {
+		if fromTime == nil {
+			return
+		}
+		opts.has_fromTime = true
+		opts.fromTime = *fromTime
+	}
 }
 
-func (a *allTripsBatchOptionImpl) Debug() bool     { return a.debug }
-func (a *allTripsBatchOptionImpl) HasDebug() bool  { return a.has_debug }
-func (a *allTripsBatchOptionImpl) Sid() string     { return a.sid }
-func (a *allTripsBatchOptionImpl) HasSid() bool    { return a.has_sid }
-func (a *allTripsBatchOptionImpl) Csid() string    { return a.csid }
-func (a *allTripsBatchOptionImpl) HasCsid() bool   { return a.has_csid }
-func (a *allTripsBatchOptionImpl) Cursor() string  { return a.cursor }
-func (a *allTripsBatchOptionImpl) HasCursor() bool { return a.has_cursor }
+func AllTripsBatchToTime(toTime time.Time) AllTripsBatchOption {
+	return func(opts *allTripsBatchOptionImpl) {
+		opts.has_toTime = true
+		opts.toTime = toTime
+	}
+}
+func AllTripsBatchToTimeFlag(toTime *time.Time) AllTripsBatchOption {
+	return func(opts *allTripsBatchOptionImpl) {
+		if toTime == nil {
+			return
+		}
+		opts.has_toTime = true
+		opts.toTime = *toTime
+	}
+}
+
+type allTripsBatchOptionImpl struct {
+	debug        bool
+	has_debug    bool
+	sid          string
+	has_sid      bool
+	csid         string
+	has_csid     bool
+	cursor       string
+	has_cursor   bool
+	fromTime     time.Time
+	has_fromTime bool
+	toTime       time.Time
+	has_toTime   bool
+}
+
+func (a *allTripsBatchOptionImpl) Debug() bool         { return a.debug }
+func (a *allTripsBatchOptionImpl) HasDebug() bool      { return a.has_debug }
+func (a *allTripsBatchOptionImpl) Sid() string         { return a.sid }
+func (a *allTripsBatchOptionImpl) HasSid() bool        { return a.has_sid }
+func (a *allTripsBatchOptionImpl) Csid() string        { return a.csid }
+func (a *allTripsBatchOptionImpl) HasCsid() bool       { return a.has_csid }
+func (a *allTripsBatchOptionImpl) Cursor() string      { return a.cursor }
+func (a *allTripsBatchOptionImpl) HasCursor() bool     { return a.has_cursor }
+func (a *allTripsBatchOptionImpl) FromTime() time.Time { return a.fromTime }
+func (a *allTripsBatchOptionImpl) HasFromTime() bool   { return a.has_fromTime }
+func (a *allTripsBatchOptionImpl) ToTime() time.Time   { return a.toTime }
+func (a *allTripsBatchOptionImpl) HasToTime() bool     { return a.has_toTime }
 
 type AllTripsBatchParams struct {
-	Debug  bool   `json:"debug"`
-	Sid    string `json:"sid"`
-	Csid   string `json:"csid"`
-	Cursor string `json:"cursor"`
+	Debug    bool      `json:"debug"`
+	Sid      string    `json:"sid"`
+	Csid     string    `json:"csid"`
+	Cursor   string    `json:"cursor"`
+	FromTime time.Time `json:"from_time"`
+	ToTime   time.Time `json:"to_time"`
 }
 
 func (o AllTripsBatchParams) Options() []AllTripsBatchOption {
@@ -114,6 +162,8 @@ func (o AllTripsBatchParams) Options() []AllTripsBatchOption {
 		AllTripsBatchSid(o.Sid),
 		AllTripsBatchCsid(o.Csid),
 		AllTripsBatchCursor(o.Cursor),
+		AllTripsBatchFromTime(o.FromTime),
+		AllTripsBatchToTime(o.ToTime),
 	}
 }
 
@@ -136,6 +186,8 @@ func (o *allTripsBatchOptionImpl) ToBaseOptions() []BaseOption {
 func (o *allTripsBatchOptionImpl) ToTripsOptions() []TripsOption {
 	return []TripsOption{
 		TripsCursor(o.Cursor()),
+		TripsFromTime(o.FromTime()),
+		TripsToTime(o.ToTime()),
 	}
 }
 

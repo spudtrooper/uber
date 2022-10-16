@@ -66,9 +66,9 @@ type getStatusInfo struct {
 	// Trip interface{} `json:"trip"`
 }
 
-//go:generate genopts --params --function GetStatus --extends Base localeCode:string:en latitude:float64:40.7701286 longitude:float64:-73.9829762
-func (c *Client) GetStatus(optss ...GetStatusOption) (*getStatusInfo, error) {
-	opts := MakeGetStatusOptions(optss...)
+//go:generate genopts --params --function Status --extends Base localeCode:string:en latitude:float64:40.7701286 longitude:float64:-73.9829762
+func (c *Client) Status(optss ...StatusOption) (*getStatusInfo, error) {
+	opts := MakeStatusOptions(optss...)
 
 	uri := request.MakeURL("https://m.uber.com/api/getStatus",
 		request.Param{"localeCode", opts.LocaleCode()},

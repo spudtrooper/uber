@@ -19,9 +19,9 @@ type getUserInfo struct {
 	Typename string `json:"__typename"`
 }
 
-//go:generate genopts --params --function GetUser --extends Base
-func (c *Client) GetUser(optss ...GetUserOption) (*getUserInfo, error) {
-	opts := MakeGetUserOptions(optss...)
+//go:generate genopts --params --function User --extends Base
+func (c *Client) User(optss ...UserOption) (*getUserInfo, error) {
+	opts := MakeUserOptions(optss...)
 
 	const uri = "https://m.uber.com/graphql"
 

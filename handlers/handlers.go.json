@@ -1,13 +1,13 @@
 [
   {
-    "Handler": "GetStatus",
+    "Handler": "Status",
     "Loc": {
       "uri": "github.com/spudtrooper/uber/blob/main/handlers/handlers.go",
       "line": 19
     }
   },
   {
-    "Handler": "GetUser",
+    "Handler": "User",
     "Loc": {
       "uri": "github.com/spudtrooper/uber/blob/main/handlers/handlers.go",
       "line": 28

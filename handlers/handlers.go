@@ -16,21 +16,21 @@ var SourceLocations []byte
 func CreateHandlers(client *api.Client) []handler.Handler {
 	b := handler.NewHandlerBuilder()
 
-	b.NewHandler("GetStatus",
+	b.NewHandler("Status",
 		func(ctx context.Context, ip any) (any, error) {
-			p := ip.(api.GetStatusParams)
-			return client.GetStatus(p.Options()...)
+			p := ip.(api.StatusParams)
+			return client.Status(p.Options()...)
 		},
-		api.GetStatusParams{},
+		api.StatusParams{},
 		handler.NewHandlerExtraRequiredFields([]string{"sid", "csid"}),
 	)
 
-	b.NewHandler("GetUser",
+	b.NewHandler("User",
 		func(ctx context.Context, ip any) (any, error) {
-			p := ip.(api.GetUserParams)
-			return client.GetUser(p.Options()...)
+			p := ip.(api.UserParams)
+			return client.User(p.Options()...)
 		},
-		api.GetUserParams{},
+		api.UserParams{},
 		handler.NewHandlerExtraRequiredFields([]string{"sid", "csid"}),
 	)
 

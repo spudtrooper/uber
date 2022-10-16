@@ -41,7 +41,7 @@ type getStatusInfoNearbyVehicle struct {
 	} `json:"vehicle"`
 }
 
-type getStatusInfo struct {
+type StatusInfo struct {
 	City struct {
 		CityID                     string                              `json:"cityId"`
 		DefaultVehicleViewID       int                                 `json:"defaultVehicleViewId"`
@@ -67,7 +67,7 @@ type getStatusInfo struct {
 }
 
 //go:generate genopts --params --function Status --extends Base localeCode:string:en latitude:float64:40.7701286 longitude:float64:-73.9829762
-func (c *Client) Status(optss ...StatusOption) (*getStatusInfo, error) {
+func (c *Client) Status(optss ...StatusOption) (*StatusInfo, error) {
 	opts := MakeStatusOptions(optss...)
 
 	uri := request.MakeURL("https://m.uber.com/api/getStatus",
@@ -96,8 +96,8 @@ func (c *Client) Status(optss ...StatusOption) (*getStatusInfo, error) {
 	}
 
 	var payload struct {
-		Data   getStatusInfo `json:"data"`
-		Status string        `json:"status"`
+		Data   StatusInfo `json:"data"`
+		Status string     `json:"status"`
 	}
 
 	if _, err := request.Post(uri, &payload, strings.NewReader(string(b)), request.RequestExtraHeaders(headers)); err != nil {

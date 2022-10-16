@@ -7,6 +7,7 @@ import (
 
 	"github.com/spudtrooper/minimalcli/handler"
 	"github.com/spudtrooper/uber/api"
+	"github.com/spudtrooper/uber/render"
 )
 
 //go:generate minimalcli gsl --input handlers.go --uri_root "github.com/spudtrooper/uber/blob/main/handlers" --output handlers.go.json
@@ -23,6 +24,7 @@ func CreateHandlers(client *api.Client) []handler.Handler {
 		},
 		api.StatusParams{},
 		handler.NewHandlerExtraRequiredFields([]string{"sid", "csid"}),
+		handler.NewHandlerRenderer(render.Status),
 	)
 
 	b.NewHandler("User",

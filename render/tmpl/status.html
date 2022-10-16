@@ -19,9 +19,9 @@
     <table class="table">
       <thead>
         <tr>
+          <th>Image</th>
           <th>ID</th>
           <th>Nearby?</th>
-          <th>Image</th>
           <th>Latitude</th>
           <th>Longitude</th>
           <th>Description</th>
@@ -31,9 +31,9 @@
       <tbody>
         {{- range .VehicleViews }}
         <tr>
+          <td><img src="{{.ImageURL}}" alt="Image of {{.ID}}" width="50" height="50"></td>
           <td>{{.ID}}</td>
           <td>{{.IsNearby}}</td>
-          <td><img src="{{.ImageURL}}" alt="Image of {{.ID}}" width="80" height="80"></td>
           <td>{{.Lat}}</td>
           <td>{{.Lng}}</td>
           <td>{{.Description}}</td>

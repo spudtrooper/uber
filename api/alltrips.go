@@ -5,10 +5,10 @@ import (
 )
 
 //go:generate genopts --params --function AllTrips --extends Trips,Base debug
-func (c *Client) AllTrips(optss ...AllTripsOption) (chan getTripsInfo, chan error) {
+func (c *Client) AllTrips(optss ...AllTripsOption) (chan getTripsInfoTrip, chan error) {
 	opts := MakeAllTripsOptions(optss...)
 
-	data, errs := make(chan getTripsInfo), make(chan error)
+	data, errs := make(chan getTripsInfoTrip), make(chan error)
 	var nextCursor string
 	go func() {
 		for {
@@ -21,15 +21,16 @@ func (c *Client) AllTrips(optss ...AllTripsOption) (chan getTripsInfo, chan erro
 				errs <- err
 				continue
 			}
-
-			data <- *res
+			for _, t := range res.Trips {
+				data <- t
+			}
 
 			if opts.Debug() {
 				log.Printf("Got %d trips, hasMore:%t", len(res.Trips), res.PagingResult.HasMore)
 			}
 
 			if !res.PagingResult.HasMore {
-				return
+				break
 			}
 
 			nextCursor = res.PagingResult.NextCursor

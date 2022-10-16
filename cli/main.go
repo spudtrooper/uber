@@ -11,6 +11,8 @@ import (
 
 func Main(ctx context.Context) error {
 	flag.String("cursor", "", "cursor")
+	flag.Duration("timeout", 0, "timeout")
+	flag.Bool("debug", false, "debug")
 
 	client, err := api.NewClientFromFlags()
 	if err != nil {

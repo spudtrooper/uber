@@ -12,6 +12,7 @@
   </script>
   <script src="https://code.jquery.com/jquery-3.6.1.min.js"
     integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+  <script src="//azimi.me/json-formatter-js/dist/json-formatter.umd.js"></script>
 </head>
 
 <body>
@@ -24,8 +25,11 @@
           <th>Nearby?</th>
           <th>Latitude</th>
           <th>Longitude</th>
+          <th>Name</th>
           <th>Description</th>
           <th>FullDescription</th>
+          <th>DetailedDescription</th>
+          <th>JSON</th>
         </tr>
       </thead>
       <tbody>
@@ -36,8 +40,19 @@
           <td>{{.IsNearby}}</td>
           <td>{{.Lat}}</td>
           <td>{{.Lng}}</td>
+          <td>{{.Name}}</td>
           <td>{{.Description}}</td>
           <td>{{.FullDescription}}</td>
+          <td>{{.DetailedDescription}}</td>
+          <td id="json_{{.ID}}"></td>
+          <script>
+            {
+              const formatter = new JSONFormatter(JSON.parse('{{.JSON}}'), 0, {
+                hoverPreviewEnabled: true,
+              });
+              document.getElementById("json_{{.ID}}").appendChild(formatter.render());
+            }
+          </script>
         </tr>
         {{- end }}
       </tbody>

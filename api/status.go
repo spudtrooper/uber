@@ -7,7 +7,7 @@ import (
 	"github.com/spudtrooper/goutil/request"
 )
 
-type getStatusInfoVehicleView struct {
+type GetStatusInfoVehicleView struct {
 	AllowCredits        bool   `json:"allowCredits"`
 	Capacity            int    `json:"capacity"`
 	Description         string `json:"description"`
@@ -30,7 +30,7 @@ type getStatusInfoVehicleView struct {
 	} `json:"productImage"`
 }
 
-type getStatusInfoNearbyVehicle struct {
+type GetStatusInfoNearbyVehicle struct {
 	EtaString      string `json:"etaString"`
 	EtaStringShort string `json:"etaStringShort"`
 	Vehicle        struct {
@@ -45,7 +45,7 @@ type StatusInfo struct {
 	City struct {
 		CityID                     string                              `json:"cityId"`
 		DefaultVehicleViewID       int                                 `json:"defaultVehicleViewId"`
-		VehicleViews               map[string]getStatusInfoVehicleView `json:"vehicleViews"`
+		VehicleViews               map[string]GetStatusInfoVehicleView `json:"vehicleViews"`
 		ProductsUnavailableMessage string                              `json:"productsUnavailableMessage"`
 	} `json:"city"`
 	ClientStatus struct {
@@ -54,7 +54,7 @@ type StatusInfo struct {
 	Eyeball struct {
 		DynamicFares struct {
 		} `json:"dynamicFares"`
-		NearbyVehicles map[string]getStatusInfoNearbyVehicle `json:"nearbyVehicles"`
+		NearbyVehicles map[string]GetStatusInfoNearbyVehicle `json:"nearbyVehicles"`
 		ReverseGeocode struct {
 			Latitude  float64 `json:"latitude"`
 			Longitude float64 `json:"longitude"`

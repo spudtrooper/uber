@@ -1,63 +1,42 @@
-<!DOCTYPE html>
-<html>
+<script src="//azimi.me/json-formatter-js/dist/json-formatter.umd.js"></script>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-  </script>
-  <script src="https://code.jquery.com/jquery-3.6.1.min.js"
-    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-  <script src="//azimi.me/json-formatter-js/dist/json-formatter.umd.js"></script>
-</head>
-
-<body>
-  <div class="container-fluid">
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Image</th>
-          <th>ID</th>
-          <th>Nearby?</th>
-          <th>Latitude</th>
-          <th>Longitude</th>
-          <th>Name</th>
-          <th>Description</th>
-          <th>FullDescription</th>
-          <th>DetailedDescription</th>
-          <th>JSON</th>
-        </tr>
-      </thead>
-      <tbody>
-        {{- range .VehicleViews }}
-        <tr>
-          <td><img src="{{.ImageURL}}" alt="Image of {{.ID}}" width="50" height="50"></td>
-          <td>{{.ID}}</td>
-          <td>{{.IsNearby}}</td>
-          <td>{{.Lat}}</td>
-          <td>{{.Lng}}</td>
-          <td>{{.Name}}</td>
-          <td>{{.Description}}</td>
-          <td>{{.FullDescription}}</td>
-          <td>{{.DetailedDescription}}</td>
-          <td id="json_{{.ID}}"></td>
-          <script>
-            {
-              const formatter = new JSONFormatter(JSON.parse('{{.JSON}}'), 0, {
-                hoverPreviewEnabled: true,
-              });
-              document.getElementById("json_{{.ID}}").appendChild(formatter.render());
-            }
-          </script>
-        </tr>
-        {{- end }}
-      </tbody>
-    </table>
-  </div>
-</body>
-
-</html>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Image</th>
+      <th>ID</th>
+      <th>Nearby?</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>FullDescription</th>
+      <th>DetailedDescription</th>
+      <th>JSON</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{- range .VehicleViews }}
+    <tr>
+      <td><img src="{{.ImageURL}}" alt="Image of {{.ID}}" width="50" height="50"></td>
+      <td>{{.ID}}</td>
+      <td>{{.IsNearby}}</td>
+      <td>{{.Lat}}</td>
+      <td>{{.Lng}}</td>
+      <td>{{.Name}}</td>
+      <td>{{.Description}}</td>
+      <td>{{.FullDescription}}</td>
+      <td>{{.DetailedDescription}}</td>
+      <td id="json_{{.ID}}"></td>
+      <script>
+        {
+          const formatter = new JSONFormatter(JSON.parse('{{.JSON}}'), 0, {
+            hoverPreviewEnabled: true,
+          });
+          document.getElementById("json_{{.ID}}").appendChild(formatter.render());
+        }
+      </script>
+    </tr>
+    {{- end }}
+  </tbody>
+</table>

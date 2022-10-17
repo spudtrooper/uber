@@ -6,14 +6,19 @@ import (
 	"encoding/json"
 	"sort"
 
+	"github.com/spudtrooper/minimalcli/handler"
 	"github.com/spudtrooper/uber/api"
 )
 
 //go:embed tmpl/status.html
 var statusTmpl string
 
-func Status(p any) ([]byte, error) {
+func Status(p any) ([]byte, handler.RendererConfig, error) {
 	d := p.(*api.StatusInfo)
+
+	config := handler.RendererConfig{
+		IsFragment: true,
+	}
 
 	type vehicleView struct {
 		ID                  string
@@ -45,7 +50,7 @@ func Status(p any) ([]byte, error) {
 		}
 		jsonBytes, err := json.Marshal(jsonObj)
 		if err != nil {
-			return nil, err
+			return nil, config, err
 		}
 		jsonStr := string(jsonBytes)
 		vehicleViews = append(vehicleViews, vehicleView{
@@ -69,7 +74,7 @@ func Status(p any) ([]byte, error) {
 	}
 	var buf bytes.Buffer
 	if err := renderTemplate(&buf, statusTmpl, "status", data); err != nil {
-		return nil, err
+		return nil, config, err
 	}
-	return buf.Bytes(), nil
+	return buf.Bytes(), config, nil
 }

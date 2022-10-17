@@ -2,10 +2,17 @@
 package api
 
 import (
+	"fmt"
+
 	"github.com/spudtrooper/goutil/or"
 )
 
-type StatusOption func(*statusOptionImpl)
+type StatusOption struct {
+	f func(*statusOptionImpl)
+	s string
+}
+
+func (o StatusOption) String() string { return o.s }
 
 type StatusOptions interface {
 	LocaleCode() string
@@ -22,83 +29,83 @@ type StatusOptions interface {
 }
 
 func StatusLocaleCode(localeCode string) StatusOption {
-	return func(opts *statusOptionImpl) {
+	return StatusOption{func(opts *statusOptionImpl) {
 		opts.has_localeCode = true
 		opts.localeCode = localeCode
-	}
+	}, fmt.Sprintf("api.StatusLocaleCode(string %+v)}", localeCode)}
 }
 func StatusLocaleCodeFlag(localeCode *string) StatusOption {
-	return func(opts *statusOptionImpl) {
+	return StatusOption{func(opts *statusOptionImpl) {
 		if localeCode == nil {
 			return
 		}
 		opts.has_localeCode = true
 		opts.localeCode = *localeCode
-	}
+	}, fmt.Sprintf("api.StatusLocaleCode(string %+v)}", localeCode)}
 }
 
 func StatusLatitude(latitude float64) StatusOption {
-	return func(opts *statusOptionImpl) {
+	return StatusOption{func(opts *statusOptionImpl) {
 		opts.has_latitude = true
 		opts.latitude = latitude
-	}
+	}, fmt.Sprintf("api.StatusLatitude(float64 %+v)}", latitude)}
 }
 func StatusLatitudeFlag(latitude *float64) StatusOption {
-	return func(opts *statusOptionImpl) {
+	return StatusOption{func(opts *statusOptionImpl) {
 		if latitude == nil {
 			return
 		}
 		opts.has_latitude = true
 		opts.latitude = *latitude
-	}
+	}, fmt.Sprintf("api.StatusLatitude(float64 %+v)}", latitude)}
 }
 
 func StatusLongitude(longitude float64) StatusOption {
-	return func(opts *statusOptionImpl) {
+	return StatusOption{func(opts *statusOptionImpl) {
 		opts.has_longitude = true
 		opts.longitude = longitude
-	}
+	}, fmt.Sprintf("api.StatusLongitude(float64 %+v)}", longitude)}
 }
 func StatusLongitudeFlag(longitude *float64) StatusOption {
-	return func(opts *statusOptionImpl) {
+	return StatusOption{func(opts *statusOptionImpl) {
 		if longitude == nil {
 			return
 		}
 		opts.has_longitude = true
 		opts.longitude = *longitude
-	}
+	}, fmt.Sprintf("api.StatusLongitude(float64 %+v)}", longitude)}
 }
 
 func StatusSid(sid string) StatusOption {
-	return func(opts *statusOptionImpl) {
+	return StatusOption{func(opts *statusOptionImpl) {
 		opts.has_sid = true
 		opts.sid = sid
-	}
+	}, fmt.Sprintf("api.StatusSid(string %+v)}", sid)}
 }
 func StatusSidFlag(sid *string) StatusOption {
-	return func(opts *statusOptionImpl) {
+	return StatusOption{func(opts *statusOptionImpl) {
 		if sid == nil {
 			return
 		}
 		opts.has_sid = true
 		opts.sid = *sid
-	}
+	}, fmt.Sprintf("api.StatusSid(string %+v)}", sid)}
 }
 
 func StatusCsid(csid string) StatusOption {
-	return func(opts *statusOptionImpl) {
+	return StatusOption{func(opts *statusOptionImpl) {
 		opts.has_csid = true
 		opts.csid = csid
-	}
+	}, fmt.Sprintf("api.StatusCsid(string %+v)}", csid)}
 }
 func StatusCsidFlag(csid *string) StatusOption {
-	return func(opts *statusOptionImpl) {
+	return StatusOption{func(opts *statusOptionImpl) {
 		if csid == nil {
 			return
 		}
 		opts.has_csid = true
 		opts.csid = *csid
-	}
+	}, fmt.Sprintf("api.StatusCsid(string %+v)}", csid)}
 }
 
 type statusOptionImpl struct {
@@ -154,7 +161,7 @@ func (o *statusOptionImpl) ToBaseOptions() []BaseOption {
 func makeStatusOptionImpl(opts ...StatusOption) *statusOptionImpl {
 	res := &statusOptionImpl{}
 	for _, opt := range opts {
-		opt(res)
+		opt.f(res)
 	}
 	return res
 }

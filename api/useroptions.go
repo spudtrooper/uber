@@ -1,7 +1,14 @@
 // DO NOT EDIT MANUALLY: Generated from https://github.com/spudtrooper/genopts
 package api
 
-type UserOption func(*userOptionImpl)
+import "fmt"
+
+type UserOption struct {
+	f func(*userOptionImpl)
+	s string
+}
+
+func (o UserOption) String() string { return o.s }
 
 type UserOptions interface {
 	Sid() string
@@ -12,35 +19,35 @@ type UserOptions interface {
 }
 
 func UserSid(sid string) UserOption {
-	return func(opts *userOptionImpl) {
+	return UserOption{func(opts *userOptionImpl) {
 		opts.has_sid = true
 		opts.sid = sid
-	}
+	}, fmt.Sprintf("api.UserSid(string %+v)}", sid)}
 }
 func UserSidFlag(sid *string) UserOption {
-	return func(opts *userOptionImpl) {
+	return UserOption{func(opts *userOptionImpl) {
 		if sid == nil {
 			return
 		}
 		opts.has_sid = true
 		opts.sid = *sid
-	}
+	}, fmt.Sprintf("api.UserSid(string %+v)}", sid)}
 }
 
 func UserCsid(csid string) UserOption {
-	return func(opts *userOptionImpl) {
+	return UserOption{func(opts *userOptionImpl) {
 		opts.has_csid = true
 		opts.csid = csid
-	}
+	}, fmt.Sprintf("api.UserCsid(string %+v)}", csid)}
 }
 func UserCsidFlag(csid *string) UserOption {
-	return func(opts *userOptionImpl) {
+	return UserOption{func(opts *userOptionImpl) {
 		if csid == nil {
 			return
 		}
 		opts.has_csid = true
 		opts.csid = *csid
-	}
+	}, fmt.Sprintf("api.UserCsid(string %+v)}", csid)}
 }
 
 type userOptionImpl struct {
@@ -78,7 +85,7 @@ func (o *userOptionImpl) ToBaseOptions() []BaseOption {
 func makeUserOptionImpl(opts ...UserOption) *userOptionImpl {
 	res := &userOptionImpl{}
 	for _, opt := range opts {
-		opt(res)
+		opt.f(res)
 	}
 	return res
 }

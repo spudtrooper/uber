@@ -1,9 +1,17 @@
 // DO NOT EDIT MANUALLY: Generated from https://github.com/spudtrooper/genopts
 package api
 
-import "time"
+import (
+	"fmt"
+	"time"
+)
 
-type TripsOption func(*tripsOptionImpl)
+type TripsOption struct {
+	f func(*tripsOptionImpl)
+	s string
+}
+
+func (o TripsOption) String() string { return o.s }
 
 type TripsOptions interface {
 	Cursor() string
@@ -20,83 +28,83 @@ type TripsOptions interface {
 }
 
 func TripsCursor(cursor string) TripsOption {
-	return func(opts *tripsOptionImpl) {
+	return TripsOption{func(opts *tripsOptionImpl) {
 		opts.has_cursor = true
 		opts.cursor = cursor
-	}
+	}, fmt.Sprintf("api.TripsCursor(string %+v)}", cursor)}
 }
 func TripsCursorFlag(cursor *string) TripsOption {
-	return func(opts *tripsOptionImpl) {
+	return TripsOption{func(opts *tripsOptionImpl) {
 		if cursor == nil {
 			return
 		}
 		opts.has_cursor = true
 		opts.cursor = *cursor
-	}
+	}, fmt.Sprintf("api.TripsCursor(string %+v)}", cursor)}
 }
 
 func TripsFromTime(fromTime time.Time) TripsOption {
-	return func(opts *tripsOptionImpl) {
+	return TripsOption{func(opts *tripsOptionImpl) {
 		opts.has_fromTime = true
 		opts.fromTime = fromTime
-	}
+	}, fmt.Sprintf("api.TripsFromTime(time.Time %+v)}", fromTime)}
 }
 func TripsFromTimeFlag(fromTime *time.Time) TripsOption {
-	return func(opts *tripsOptionImpl) {
+	return TripsOption{func(opts *tripsOptionImpl) {
 		if fromTime == nil {
 			return
 		}
 		opts.has_fromTime = true
 		opts.fromTime = *fromTime
-	}
+	}, fmt.Sprintf("api.TripsFromTime(time.Time %+v)}", fromTime)}
 }
 
 func TripsToTime(toTime time.Time) TripsOption {
-	return func(opts *tripsOptionImpl) {
+	return TripsOption{func(opts *tripsOptionImpl) {
 		opts.has_toTime = true
 		opts.toTime = toTime
-	}
+	}, fmt.Sprintf("api.TripsToTime(time.Time %+v)}", toTime)}
 }
 func TripsToTimeFlag(toTime *time.Time) TripsOption {
-	return func(opts *tripsOptionImpl) {
+	return TripsOption{func(opts *tripsOptionImpl) {
 		if toTime == nil {
 			return
 		}
 		opts.has_toTime = true
 		opts.toTime = *toTime
-	}
+	}, fmt.Sprintf("api.TripsToTime(time.Time %+v)}", toTime)}
 }
 
 func TripsSid(sid string) TripsOption {
-	return func(opts *tripsOptionImpl) {
+	return TripsOption{func(opts *tripsOptionImpl) {
 		opts.has_sid = true
 		opts.sid = sid
-	}
+	}, fmt.Sprintf("api.TripsSid(string %+v)}", sid)}
 }
 func TripsSidFlag(sid *string) TripsOption {
-	return func(opts *tripsOptionImpl) {
+	return TripsOption{func(opts *tripsOptionImpl) {
 		if sid == nil {
 			return
 		}
 		opts.has_sid = true
 		opts.sid = *sid
-	}
+	}, fmt.Sprintf("api.TripsSid(string %+v)}", sid)}
 }
 
 func TripsCsid(csid string) TripsOption {
-	return func(opts *tripsOptionImpl) {
+	return TripsOption{func(opts *tripsOptionImpl) {
 		opts.has_csid = true
 		opts.csid = csid
-	}
+	}, fmt.Sprintf("api.TripsCsid(string %+v)}", csid)}
 }
 func TripsCsidFlag(csid *string) TripsOption {
-	return func(opts *tripsOptionImpl) {
+	return TripsOption{func(opts *tripsOptionImpl) {
 		if csid == nil {
 			return
 		}
 		opts.has_csid = true
 		opts.csid = *csid
-	}
+	}, fmt.Sprintf("api.TripsCsid(string %+v)}", csid)}
 }
 
 type tripsOptionImpl struct {
@@ -152,7 +160,7 @@ func (o *tripsOptionImpl) ToBaseOptions() []BaseOption {
 func makeTripsOptionImpl(opts ...TripsOption) *tripsOptionImpl {
 	res := &tripsOptionImpl{}
 	for _, opt := range opts {
-		opt(res)
+		opt.f(res)
 	}
 	return res
 }

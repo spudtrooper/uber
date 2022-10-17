@@ -1,6 +1,18 @@
 <script src="//azimi.me/json-formatter-js/dist/json-formatter.umd.js"></script>
 
-<table class="table">
+<script type="text/javascript" language="javascript"
+  src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" language="javascript"
+  src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+
+<script>
+  $(document).ready(function () {
+    $('#tab').DataTable();
+  });
+</script>
+
+
+<table class="table" id="tab">
   <thead>
     <tr>
       <th>Image</th>

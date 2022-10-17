@@ -177,11 +177,11 @@ func (o AllTripsParams) Options() []AllTripsOption {
 // ToTripsOptions converts AllTripsOption to an array of TripsOption
 func (o *allTripsOptionImpl) ToTripsOptions() []TripsOption {
 	return []TripsOption{
-		TripsSid(o.Sid()),
-		TripsCsid(o.Csid()),
 		TripsCursor(o.Cursor()),
 		TripsFromTime(o.FromTime()),
 		TripsToTime(o.ToTime()),
+		TripsSid(o.Sid()),
+		TripsCsid(o.Csid()),
 	}
 }
 

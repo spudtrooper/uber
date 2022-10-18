@@ -43,6 +43,7 @@ func CreateHandlers(client *api.Client) []handler.Handler {
 		},
 		api.TripsParams{},
 		handler.NewHandlerExtraRequiredFields([]string{"sid", "csid"}),
+		handler.NewHandlerRenderer(render.Trips),
 	)
 
 	b.NewHandler("AllTrips",
@@ -52,6 +53,7 @@ func CreateHandlers(client *api.Client) []handler.Handler {
 		},
 		api.AllTripsBatchParams{},
 		handler.NewHandlerExtraRequiredFields([]string{"sid", "csid"}),
+		handler.NewHandlerRenderer(render.AllTripsBatch),
 	)
 
 	return b.Build()

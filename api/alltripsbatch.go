@@ -6,8 +6,7 @@ import (
 )
 
 type AllTripsBatchInfo struct {
-	Rides []getTripsInfoTrip `json:"rides"`
-	Count int                `json:"count"`
+	Trips []TripsInfoTrip `json:"trips"`
 }
 
 // TODO: genopts should transitively extend options
@@ -16,11 +15,11 @@ func (c *Client) AllTripsBatch(optss ...AllTripsBatchOption) (*AllTripsBatchInfo
 	opts := MakeAllTripsBatchOptions(optss...)
 
 	data, errs := c.AllTrips(opts.ToAllTripsOptions()...)
-	var rides []getTripsInfoTrip
+	var trips []TripsInfoTrip
 	errBuilder := goutilerrors.MakeErrorCollector()
 	parallel.WaitFor(func() {
 		for d := range data {
-			rides = append(rides, d)
+			trips = append(trips, d)
 		}
 	}, func() {
 		for e := range errs {
@@ -32,8 +31,7 @@ func (c *Client) AllTripsBatch(optss ...AllTripsBatchOption) (*AllTripsBatchInfo
 		return nil, err
 	}
 	res := &AllTripsBatchInfo{
-		Rides: rides,
-		Count: len(rides),
+		Trips: trips,
 	}
 	return res, nil
 }

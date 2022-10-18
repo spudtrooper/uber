@@ -4,14 +4,18 @@ import (
 	"log"
 )
 
-//go:generate genopts --params --function AllTrips --extends Trips,Base debug
-func (c *Client) AllTrips(optss ...AllTripsOption) (chan getTripsInfoTrip, chan error) {
+//go:generate genopts --params --function AllTrips --extends Trips,Base debug totalLimit:int
+func (c *Client) AllTrips(optss ...AllTripsOption) (chan TripsInfoTrip, chan error) {
 	opts := MakeAllTripsOptions(optss...)
 
-	data, errs := make(chan getTripsInfoTrip), make(chan error)
+	data, errs := make(chan TripsInfoTrip), make(chan error)
 	var nextCursor string
 	go func() {
-		for {
+		for i := 0; ; i++ {
+			if opts.TotalLimit() > 0 && i > opts.TotalLimit() {
+				log.Printf("break because at limit of %d", opts.TotalLimit())
+				break
+			}
 			os := opts.ToTripsOptions()
 			if nextCursor != "" {
 				os = append(os, TripsCursor(nextCursor))

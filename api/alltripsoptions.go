@@ -16,6 +16,8 @@ func (o AllTripsOption) String() string { return o.s }
 type AllTripsOptions interface {
 	Debug() bool
 	HasDebug() bool
+	TotalLimit() int
+	HasTotalLimit() bool
 	Cursor() string
 	HasCursor() bool
 	FromTime() time.Time
@@ -44,6 +46,22 @@ func AllTripsDebugFlag(debug *bool) AllTripsOption {
 		opts.has_debug = true
 		opts.debug = *debug
 	}, fmt.Sprintf("api.AllTripsDebug(bool %+v)}", debug)}
+}
+
+func AllTripsTotalLimit(totalLimit int) AllTripsOption {
+	return AllTripsOption{func(opts *allTripsOptionImpl) {
+		opts.has_totalLimit = true
+		opts.totalLimit = totalLimit
+	}, fmt.Sprintf("api.AllTripsTotalLimit(int %+v)}", totalLimit)}
+}
+func AllTripsTotalLimitFlag(totalLimit *int) AllTripsOption {
+	return AllTripsOption{func(opts *allTripsOptionImpl) {
+		if totalLimit == nil {
+			return
+		}
+		opts.has_totalLimit = true
+		opts.totalLimit = *totalLimit
+	}, fmt.Sprintf("api.AllTripsTotalLimit(int %+v)}", totalLimit)}
 }
 
 func AllTripsCursor(cursor string) AllTripsOption {
@@ -127,22 +145,26 @@ func AllTripsCsidFlag(csid *string) AllTripsOption {
 }
 
 type allTripsOptionImpl struct {
-	debug        bool
-	has_debug    bool
-	cursor       string
-	has_cursor   bool
-	fromTime     time.Time
-	has_fromTime bool
-	toTime       time.Time
-	has_toTime   bool
-	sid          string
-	has_sid      bool
-	csid         string
-	has_csid     bool
+	debug          bool
+	has_debug      bool
+	totalLimit     int
+	has_totalLimit bool
+	cursor         string
+	has_cursor     bool
+	fromTime       time.Time
+	has_fromTime   bool
+	toTime         time.Time
+	has_toTime     bool
+	sid            string
+	has_sid        bool
+	csid           string
+	has_csid       bool
 }
 
 func (a *allTripsOptionImpl) Debug() bool         { return a.debug }
 func (a *allTripsOptionImpl) HasDebug() bool      { return a.has_debug }
+func (a *allTripsOptionImpl) TotalLimit() int     { return a.totalLimit }
+func (a *allTripsOptionImpl) HasTotalLimit() bool { return a.has_totalLimit }
 func (a *allTripsOptionImpl) Cursor() string      { return a.cursor }
 func (a *allTripsOptionImpl) HasCursor() bool     { return a.has_cursor }
 func (a *allTripsOptionImpl) FromTime() time.Time { return a.fromTime }
@@ -155,17 +177,19 @@ func (a *allTripsOptionImpl) Csid() string        { return a.csid }
 func (a *allTripsOptionImpl) HasCsid() bool       { return a.has_csid }
 
 type AllTripsParams struct {
-	Debug    bool      `json:"debug"`
-	Cursor   string    `json:"cursor"`
-	FromTime time.Time `json:"from_time"`
-	ToTime   time.Time `json:"to_time"`
-	Sid      string    `json:"sid"`
-	Csid     string    `json:"csid"`
+	Debug      bool      `json:"debug"`
+	TotalLimit int       `json:"total_limit"`
+	Cursor     string    `json:"cursor"`
+	FromTime   time.Time `json:"from_time"`
+	ToTime     time.Time `json:"to_time"`
+	Sid        string    `json:"sid"`
+	Csid       string    `json:"csid"`
 }
 
 func (o AllTripsParams) Options() []AllTripsOption {
 	return []AllTripsOption{
 		AllTripsDebug(o.Debug),
+		AllTripsTotalLimit(o.TotalLimit),
 		AllTripsCursor(o.Cursor),
 		AllTripsFromTime(o.FromTime),
 		AllTripsToTime(o.ToTime),
@@ -177,11 +201,11 @@ func (o AllTripsParams) Options() []AllTripsOption {
 // ToTripsOptions converts AllTripsOption to an array of TripsOption
 func (o *allTripsOptionImpl) ToTripsOptions() []TripsOption {
 	return []TripsOption{
-		TripsCursor(o.Cursor()),
-		TripsFromTime(o.FromTime()),
 		TripsToTime(o.ToTime()),
 		TripsSid(o.Sid()),
 		TripsCsid(o.Csid()),
+		TripsCursor(o.Cursor()),
+		TripsFromTime(o.FromTime()),
 	}
 }
 

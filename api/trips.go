@@ -7,7 +7,7 @@ import (
 	"github.com/spudtrooper/goutil/request"
 )
 
-type getTripsInfoTrip struct {
+type TripsInfoTrip struct {
 	BeginTripTime      string   `json:"beginTripTime"`
 	DisableCanceling   bool     `json:"disableCanceling"`
 	Driver             string   `json:"driver"`
@@ -27,10 +27,10 @@ type getTripsInfoTrip struct {
 	Typename           string   `json:"__typename"`
 }
 
-type getTripsInfo struct {
-	Reservations []interface{}      `json:"reservations"`
-	Trips        []getTripsInfoTrip `json:"trips"`
-	Typename     string             `json:"__typename"`
+type TripsInfo struct {
+	Reservations []interface{}   `json:"reservations"`
+	Trips        []TripsInfoTrip `json:"trips"`
+	Typename     string          `json:"__typename"`
 	PagingResult struct {
 		HasMore    bool   `json:"hasMore"`
 		NextCursor string `json:"nextCursor"`
@@ -40,7 +40,7 @@ type getTripsInfo struct {
 }
 
 //go:generate genopts --params --function Trips --extends Base cursor:string fromTime:time.Time toTime:time.Time
-func (c *Client) Trips(optss ...TripsOption) (*getTripsInfo, error) {
+func (c *Client) Trips(optss ...TripsOption) (*TripsInfo, error) {
 	opts := MakeTripsOptions(optss...)
 
 	const uri = "https://riders.uber.com/graphql"
@@ -89,7 +89,7 @@ func (c *Client) Trips(optss ...TripsOption) (*getTripsInfo, error) {
 
 	var payload struct {
 		Data struct {
-			GetTrips getTripsInfo `json:"getTrips"`
+			GetTrips TripsInfo `json:"getTrips"`
 		} `json:"data"`
 	}
 	if err := json.Unmarshal(res.Data, &payload); err != nil {

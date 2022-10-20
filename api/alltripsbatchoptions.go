@@ -215,19 +215,19 @@ func (o *allTripsBatchOptionImpl) ToAllTripsOptions() []AllTripsOption {
 // ToBaseOptions converts AllTripsBatchOption to an array of BaseOption
 func (o *allTripsBatchOptionImpl) ToBaseOptions() []BaseOption {
 	return []BaseOption{
-		BaseCsid(o.Csid()),
 		BaseSid(o.Sid()),
+		BaseCsid(o.Csid()),
 	}
 }
 
 // ToTripsOptions converts AllTripsBatchOption to an array of TripsOption
 func (o *allTripsBatchOptionImpl) ToTripsOptions() []TripsOption {
 	return []TripsOption{
-		TripsCursor(o.Cursor()),
 		TripsFromTime(o.FromTime()),
 		TripsToTime(o.ToTime()),
 		TripsSid(o.Sid()),
 		TripsCsid(o.Csid()),
+		TripsCursor(o.Cursor()),
 	}
 }
 

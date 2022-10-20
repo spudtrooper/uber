@@ -201,19 +201,19 @@ func (o AllTripsParams) Options() []AllTripsOption {
 // ToTripsOptions converts AllTripsOption to an array of TripsOption
 func (o *allTripsOptionImpl) ToTripsOptions() []TripsOption {
 	return []TripsOption{
+		TripsCursor(o.Cursor()),
 		TripsFromTime(o.FromTime()),
 		TripsToTime(o.ToTime()),
 		TripsSid(o.Sid()),
 		TripsCsid(o.Csid()),
-		TripsCursor(o.Cursor()),
 	}
 }
 
 // ToBaseOptions converts AllTripsOption to an array of BaseOption
 func (o *allTripsOptionImpl) ToBaseOptions() []BaseOption {
 	return []BaseOption{
-		BaseCsid(o.Csid()),
 		BaseSid(o.Sid()),
+		BaseCsid(o.Csid()),
 	}
 }
 

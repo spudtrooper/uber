@@ -14,17 +14,33 @@ type TripsOption struct {
 func (o TripsOption) String() string { return o.s }
 
 type TripsOptions interface {
+	Csid() string
+	HasCsid() bool
 	Cursor() string
 	HasCursor() bool
 	FromTime() time.Time
 	HasFromTime() bool
-	ToTime() time.Time
-	HasToTime() bool
 	Sid() string
 	HasSid() bool
-	Csid() string
-	HasCsid() bool
+	ToTime() time.Time
+	HasToTime() bool
 	ToBaseOptions() []BaseOption
+}
+
+func TripsCsid(csid string) TripsOption {
+	return TripsOption{func(opts *tripsOptionImpl) {
+		opts.has_csid = true
+		opts.csid = csid
+	}, fmt.Sprintf("api.TripsCsid(string %+v)}", csid)}
+}
+func TripsCsidFlag(csid *string) TripsOption {
+	return TripsOption{func(opts *tripsOptionImpl) {
+		if csid == nil {
+			return
+		}
+		opts.has_csid = true
+		opts.csid = *csid
+	}, fmt.Sprintf("api.TripsCsid(string %+v)}", csid)}
 }
 
 func TripsCursor(cursor string) TripsOption {
@@ -59,22 +75,6 @@ func TripsFromTimeFlag(fromTime *time.Time) TripsOption {
 	}, fmt.Sprintf("api.TripsFromTime(time.Time %+v)}", fromTime)}
 }
 
-func TripsToTime(toTime time.Time) TripsOption {
-	return TripsOption{func(opts *tripsOptionImpl) {
-		opts.has_toTime = true
-		opts.toTime = toTime
-	}, fmt.Sprintf("api.TripsToTime(time.Time %+v)}", toTime)}
-}
-func TripsToTimeFlag(toTime *time.Time) TripsOption {
-	return TripsOption{func(opts *tripsOptionImpl) {
-		if toTime == nil {
-			return
-		}
-		opts.has_toTime = true
-		opts.toTime = *toTime
-	}, fmt.Sprintf("api.TripsToTime(time.Time %+v)}", toTime)}
-}
-
 func TripsSid(sid string) TripsOption {
 	return TripsOption{func(opts *tripsOptionImpl) {
 		opts.has_sid = true
@@ -91,20 +91,20 @@ func TripsSidFlag(sid *string) TripsOption {
 	}, fmt.Sprintf("api.TripsSid(string %+v)}", sid)}
 }
 
-func TripsCsid(csid string) TripsOption {
+func TripsToTime(toTime time.Time) TripsOption {
 	return TripsOption{func(opts *tripsOptionImpl) {
-		opts.has_csid = true
-		opts.csid = csid
-	}, fmt.Sprintf("api.TripsCsid(string %+v)}", csid)}
+		opts.has_toTime = true
+		opts.toTime = toTime
+	}, fmt.Sprintf("api.TripsToTime(time.Time %+v)}", toTime)}
 }
-func TripsCsidFlag(csid *string) TripsOption {
+func TripsToTimeFlag(toTime *time.Time) TripsOption {
 	return TripsOption{func(opts *tripsOptionImpl) {
-		if csid == nil {
+		if toTime == nil {
 			return
 		}
-		opts.has_csid = true
-		opts.csid = *csid
-	}, fmt.Sprintf("api.TripsCsid(string %+v)}", csid)}
+		opts.has_toTime = true
+		opts.toTime = *toTime
+	}, fmt.Sprintf("api.TripsToTime(time.Time %+v)}", toTime)}
 }
 
 type tripsOptionImpl struct {
@@ -120,32 +120,32 @@ type tripsOptionImpl struct {
 	has_csid     bool
 }
 
+func (t *tripsOptionImpl) Csid() string        { return t.csid }
+func (t *tripsOptionImpl) HasCsid() bool       { return t.has_csid }
 func (t *tripsOptionImpl) Cursor() string      { return t.cursor }
 func (t *tripsOptionImpl) HasCursor() bool     { return t.has_cursor }
 func (t *tripsOptionImpl) FromTime() time.Time { return t.fromTime }
 func (t *tripsOptionImpl) HasFromTime() bool   { return t.has_fromTime }
-func (t *tripsOptionImpl) ToTime() time.Time   { return t.toTime }
-func (t *tripsOptionImpl) HasToTime() bool     { return t.has_toTime }
 func (t *tripsOptionImpl) Sid() string         { return t.sid }
 func (t *tripsOptionImpl) HasSid() bool        { return t.has_sid }
-func (t *tripsOptionImpl) Csid() string        { return t.csid }
-func (t *tripsOptionImpl) HasCsid() bool       { return t.has_csid }
+func (t *tripsOptionImpl) ToTime() time.Time   { return t.toTime }
+func (t *tripsOptionImpl) HasToTime() bool     { return t.has_toTime }
 
 type TripsParams struct {
+	Csid     string    `json:"csid"`
 	Cursor   string    `json:"cursor"`
 	FromTime time.Time `json:"from_time"`
-	ToTime   time.Time `json:"to_time"`
 	Sid      string    `json:"sid"`
-	Csid     string    `json:"csid"`
+	ToTime   time.Time `json:"to_time"`
 }
 
 func (o TripsParams) Options() []TripsOption {
 	return []TripsOption{
+		TripsCsid(o.Csid),
 		TripsCursor(o.Cursor),
 		TripsFromTime(o.FromTime),
-		TripsToTime(o.ToTime),
 		TripsSid(o.Sid),
-		TripsCsid(o.Csid),
+		TripsToTime(o.ToTime),
 	}
 }
 

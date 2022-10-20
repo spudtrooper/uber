@@ -11,26 +11,10 @@ type BaseOption struct {
 func (o BaseOption) String() string { return o.s }
 
 type BaseOptions interface {
-	Sid() string
-	HasSid() bool
 	Csid() string
 	HasCsid() bool
-}
-
-func BaseSid(sid string) BaseOption {
-	return BaseOption{func(opts *baseOptionImpl) {
-		opts.has_sid = true
-		opts.sid = sid
-	}, fmt.Sprintf("api.BaseSid(string %+v)}", sid)}
-}
-func BaseSidFlag(sid *string) BaseOption {
-	return BaseOption{func(opts *baseOptionImpl) {
-		if sid == nil {
-			return
-		}
-		opts.has_sid = true
-		opts.sid = *sid
-	}, fmt.Sprintf("api.BaseSid(string %+v)}", sid)}
+	Sid() string
+	HasSid() bool
 }
 
 func BaseCsid(csid string) BaseOption {
@@ -49,6 +33,22 @@ func BaseCsidFlag(csid *string) BaseOption {
 	}, fmt.Sprintf("api.BaseCsid(string %+v)}", csid)}
 }
 
+func BaseSid(sid string) BaseOption {
+	return BaseOption{func(opts *baseOptionImpl) {
+		opts.has_sid = true
+		opts.sid = sid
+	}, fmt.Sprintf("api.BaseSid(string %+v)}", sid)}
+}
+func BaseSidFlag(sid *string) BaseOption {
+	return BaseOption{func(opts *baseOptionImpl) {
+		if sid == nil {
+			return
+		}
+		opts.has_sid = true
+		opts.sid = *sid
+	}, fmt.Sprintf("api.BaseSid(string %+v)}", sid)}
+}
+
 type baseOptionImpl struct {
 	sid      string
 	has_sid  bool
@@ -56,10 +56,10 @@ type baseOptionImpl struct {
 	has_csid bool
 }
 
-func (b *baseOptionImpl) Sid() string   { return b.sid }
-func (b *baseOptionImpl) HasSid() bool  { return b.has_sid }
 func (b *baseOptionImpl) Csid() string  { return b.csid }
 func (b *baseOptionImpl) HasCsid() bool { return b.has_csid }
+func (b *baseOptionImpl) Sid() string   { return b.sid }
+func (b *baseOptionImpl) HasSid() bool  { return b.has_sid }
 
 func makeBaseOptionImpl(opts ...BaseOption) *baseOptionImpl {
 	res := &baseOptionImpl{}

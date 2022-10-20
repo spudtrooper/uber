@@ -14,55 +14,39 @@ type AllTripsBatchOption struct {
 func (o AllTripsBatchOption) String() string { return o.s }
 
 type AllTripsBatchOptions interface {
-	Debug() bool
-	HasDebug() bool
-	TotalLimit() int
-	HasTotalLimit() bool
-	Cursor() string
-	HasCursor() bool
-	FromTime() time.Time
-	HasFromTime() bool
-	ToTime() time.Time
-	HasToTime() bool
-	Sid() string
-	HasSid() bool
 	Csid() string
 	HasCsid() bool
+	Cursor() string
+	HasCursor() bool
+	Debug() bool
+	HasDebug() bool
+	FromTime() time.Time
+	HasFromTime() bool
+	Sid() string
+	HasSid() bool
+	ToTime() time.Time
+	HasToTime() bool
+	TotalLimit() int
+	HasTotalLimit() bool
 	ToAllTripsOptions() []AllTripsOption
 	ToTripsOptions() []TripsOption
 	ToBaseOptions() []BaseOption
 }
 
-func AllTripsBatchDebug(debug bool) AllTripsBatchOption {
+func AllTripsBatchCsid(csid string) AllTripsBatchOption {
 	return AllTripsBatchOption{func(opts *allTripsBatchOptionImpl) {
-		opts.has_debug = true
-		opts.debug = debug
-	}, fmt.Sprintf("api.AllTripsBatchDebug(bool %+v)}", debug)}
+		opts.has_csid = true
+		opts.csid = csid
+	}, fmt.Sprintf("api.AllTripsBatchCsid(string %+v)}", csid)}
 }
-func AllTripsBatchDebugFlag(debug *bool) AllTripsBatchOption {
+func AllTripsBatchCsidFlag(csid *string) AllTripsBatchOption {
 	return AllTripsBatchOption{func(opts *allTripsBatchOptionImpl) {
-		if debug == nil {
+		if csid == nil {
 			return
 		}
-		opts.has_debug = true
-		opts.debug = *debug
-	}, fmt.Sprintf("api.AllTripsBatchDebug(bool %+v)}", debug)}
-}
-
-func AllTripsBatchTotalLimit(totalLimit int) AllTripsBatchOption {
-	return AllTripsBatchOption{func(opts *allTripsBatchOptionImpl) {
-		opts.has_totalLimit = true
-		opts.totalLimit = totalLimit
-	}, fmt.Sprintf("api.AllTripsBatchTotalLimit(int %+v)}", totalLimit)}
-}
-func AllTripsBatchTotalLimitFlag(totalLimit *int) AllTripsBatchOption {
-	return AllTripsBatchOption{func(opts *allTripsBatchOptionImpl) {
-		if totalLimit == nil {
-			return
-		}
-		opts.has_totalLimit = true
-		opts.totalLimit = *totalLimit
-	}, fmt.Sprintf("api.AllTripsBatchTotalLimit(int %+v)}", totalLimit)}
+		opts.has_csid = true
+		opts.csid = *csid
+	}, fmt.Sprintf("api.AllTripsBatchCsid(string %+v)}", csid)}
 }
 
 func AllTripsBatchCursor(cursor string) AllTripsBatchOption {
@@ -81,6 +65,22 @@ func AllTripsBatchCursorFlag(cursor *string) AllTripsBatchOption {
 	}, fmt.Sprintf("api.AllTripsBatchCursor(string %+v)}", cursor)}
 }
 
+func AllTripsBatchDebug(debug bool) AllTripsBatchOption {
+	return AllTripsBatchOption{func(opts *allTripsBatchOptionImpl) {
+		opts.has_debug = true
+		opts.debug = debug
+	}, fmt.Sprintf("api.AllTripsBatchDebug(bool %+v)}", debug)}
+}
+func AllTripsBatchDebugFlag(debug *bool) AllTripsBatchOption {
+	return AllTripsBatchOption{func(opts *allTripsBatchOptionImpl) {
+		if debug == nil {
+			return
+		}
+		opts.has_debug = true
+		opts.debug = *debug
+	}, fmt.Sprintf("api.AllTripsBatchDebug(bool %+v)}", debug)}
+}
+
 func AllTripsBatchFromTime(fromTime time.Time) AllTripsBatchOption {
 	return AllTripsBatchOption{func(opts *allTripsBatchOptionImpl) {
 		opts.has_fromTime = true
@@ -95,22 +95,6 @@ func AllTripsBatchFromTimeFlag(fromTime *time.Time) AllTripsBatchOption {
 		opts.has_fromTime = true
 		opts.fromTime = *fromTime
 	}, fmt.Sprintf("api.AllTripsBatchFromTime(time.Time %+v)}", fromTime)}
-}
-
-func AllTripsBatchToTime(toTime time.Time) AllTripsBatchOption {
-	return AllTripsBatchOption{func(opts *allTripsBatchOptionImpl) {
-		opts.has_toTime = true
-		opts.toTime = toTime
-	}, fmt.Sprintf("api.AllTripsBatchToTime(time.Time %+v)}", toTime)}
-}
-func AllTripsBatchToTimeFlag(toTime *time.Time) AllTripsBatchOption {
-	return AllTripsBatchOption{func(opts *allTripsBatchOptionImpl) {
-		if toTime == nil {
-			return
-		}
-		opts.has_toTime = true
-		opts.toTime = *toTime
-	}, fmt.Sprintf("api.AllTripsBatchToTime(time.Time %+v)}", toTime)}
 }
 
 func AllTripsBatchSid(sid string) AllTripsBatchOption {
@@ -129,20 +113,36 @@ func AllTripsBatchSidFlag(sid *string) AllTripsBatchOption {
 	}, fmt.Sprintf("api.AllTripsBatchSid(string %+v)}", sid)}
 }
 
-func AllTripsBatchCsid(csid string) AllTripsBatchOption {
+func AllTripsBatchToTime(toTime time.Time) AllTripsBatchOption {
 	return AllTripsBatchOption{func(opts *allTripsBatchOptionImpl) {
-		opts.has_csid = true
-		opts.csid = csid
-	}, fmt.Sprintf("api.AllTripsBatchCsid(string %+v)}", csid)}
+		opts.has_toTime = true
+		opts.toTime = toTime
+	}, fmt.Sprintf("api.AllTripsBatchToTime(time.Time %+v)}", toTime)}
 }
-func AllTripsBatchCsidFlag(csid *string) AllTripsBatchOption {
+func AllTripsBatchToTimeFlag(toTime *time.Time) AllTripsBatchOption {
 	return AllTripsBatchOption{func(opts *allTripsBatchOptionImpl) {
-		if csid == nil {
+		if toTime == nil {
 			return
 		}
-		opts.has_csid = true
-		opts.csid = *csid
-	}, fmt.Sprintf("api.AllTripsBatchCsid(string %+v)}", csid)}
+		opts.has_toTime = true
+		opts.toTime = *toTime
+	}, fmt.Sprintf("api.AllTripsBatchToTime(time.Time %+v)}", toTime)}
+}
+
+func AllTripsBatchTotalLimit(totalLimit int) AllTripsBatchOption {
+	return AllTripsBatchOption{func(opts *allTripsBatchOptionImpl) {
+		opts.has_totalLimit = true
+		opts.totalLimit = totalLimit
+	}, fmt.Sprintf("api.AllTripsBatchTotalLimit(int %+v)}", totalLimit)}
+}
+func AllTripsBatchTotalLimitFlag(totalLimit *int) AllTripsBatchOption {
+	return AllTripsBatchOption{func(opts *allTripsBatchOptionImpl) {
+		if totalLimit == nil {
+			return
+		}
+		opts.has_totalLimit = true
+		opts.totalLimit = *totalLimit
+	}, fmt.Sprintf("api.AllTripsBatchTotalLimit(int %+v)}", totalLimit)}
 }
 
 type allTripsBatchOptionImpl struct {
@@ -162,64 +162,64 @@ type allTripsBatchOptionImpl struct {
 	has_csid       bool
 }
 
-func (a *allTripsBatchOptionImpl) Debug() bool         { return a.debug }
-func (a *allTripsBatchOptionImpl) HasDebug() bool      { return a.has_debug }
-func (a *allTripsBatchOptionImpl) TotalLimit() int     { return a.totalLimit }
-func (a *allTripsBatchOptionImpl) HasTotalLimit() bool { return a.has_totalLimit }
-func (a *allTripsBatchOptionImpl) Cursor() string      { return a.cursor }
-func (a *allTripsBatchOptionImpl) HasCursor() bool     { return a.has_cursor }
-func (a *allTripsBatchOptionImpl) FromTime() time.Time { return a.fromTime }
-func (a *allTripsBatchOptionImpl) HasFromTime() bool   { return a.has_fromTime }
-func (a *allTripsBatchOptionImpl) ToTime() time.Time   { return a.toTime }
-func (a *allTripsBatchOptionImpl) HasToTime() bool     { return a.has_toTime }
-func (a *allTripsBatchOptionImpl) Sid() string         { return a.sid }
-func (a *allTripsBatchOptionImpl) HasSid() bool        { return a.has_sid }
 func (a *allTripsBatchOptionImpl) Csid() string        { return a.csid }
 func (a *allTripsBatchOptionImpl) HasCsid() bool       { return a.has_csid }
+func (a *allTripsBatchOptionImpl) Cursor() string      { return a.cursor }
+func (a *allTripsBatchOptionImpl) HasCursor() bool     { return a.has_cursor }
+func (a *allTripsBatchOptionImpl) Debug() bool         { return a.debug }
+func (a *allTripsBatchOptionImpl) HasDebug() bool      { return a.has_debug }
+func (a *allTripsBatchOptionImpl) FromTime() time.Time { return a.fromTime }
+func (a *allTripsBatchOptionImpl) HasFromTime() bool   { return a.has_fromTime }
+func (a *allTripsBatchOptionImpl) Sid() string         { return a.sid }
+func (a *allTripsBatchOptionImpl) HasSid() bool        { return a.has_sid }
+func (a *allTripsBatchOptionImpl) ToTime() time.Time   { return a.toTime }
+func (a *allTripsBatchOptionImpl) HasToTime() bool     { return a.has_toTime }
+func (a *allTripsBatchOptionImpl) TotalLimit() int     { return a.totalLimit }
+func (a *allTripsBatchOptionImpl) HasTotalLimit() bool { return a.has_totalLimit }
 
 type AllTripsBatchParams struct {
-	Debug      bool      `json:"debug"`
-	TotalLimit int       `json:"total_limit"`
-	Cursor     string    `json:"cursor"`
-	FromTime   time.Time `json:"from_time"`
-	ToTime     time.Time `json:"to_time"`
-	Sid        string    `json:"sid"`
 	Csid       string    `json:"csid"`
+	Cursor     string    `json:"cursor"`
+	Debug      bool      `json:"debug"`
+	FromTime   time.Time `json:"from_time"`
+	Sid        string    `json:"sid"`
+	ToTime     time.Time `json:"to_time"`
+	TotalLimit int       `json:"total_limit"`
 }
 
 func (o AllTripsBatchParams) Options() []AllTripsBatchOption {
 	return []AllTripsBatchOption{
-		AllTripsBatchDebug(o.Debug),
-		AllTripsBatchTotalLimit(o.TotalLimit),
-		AllTripsBatchCursor(o.Cursor),
-		AllTripsBatchFromTime(o.FromTime),
-		AllTripsBatchToTime(o.ToTime),
-		AllTripsBatchSid(o.Sid),
 		AllTripsBatchCsid(o.Csid),
+		AllTripsBatchCursor(o.Cursor),
+		AllTripsBatchDebug(o.Debug),
+		AllTripsBatchFromTime(o.FromTime),
+		AllTripsBatchSid(o.Sid),
+		AllTripsBatchToTime(o.ToTime),
+		AllTripsBatchTotalLimit(o.TotalLimit),
 	}
 }
 
 // ToAllTripsOptions converts AllTripsBatchOption to an array of AllTripsOption
 func (o *allTripsBatchOptionImpl) ToAllTripsOptions() []AllTripsOption {
 	return []AllTripsOption{
-		AllTripsSid(o.Sid()),
-		AllTripsCsid(o.Csid()),
 		AllTripsDebug(o.Debug()),
 		AllTripsTotalLimit(o.TotalLimit()),
 		AllTripsCursor(o.Cursor()),
 		AllTripsFromTime(o.FromTime()),
 		AllTripsToTime(o.ToTime()),
+		AllTripsSid(o.Sid()),
+		AllTripsCsid(o.Csid()),
 	}
 }
 
 // ToTripsOptions converts AllTripsBatchOption to an array of TripsOption
 func (o *allTripsBatchOptionImpl) ToTripsOptions() []TripsOption {
 	return []TripsOption{
-		TripsToTime(o.ToTime()),
 		TripsSid(o.Sid()),
 		TripsCsid(o.Csid()),
 		TripsCursor(o.Cursor()),
 		TripsFromTime(o.FromTime()),
+		TripsToTime(o.ToTime()),
 	}
 }
 

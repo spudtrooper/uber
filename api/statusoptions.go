@@ -15,33 +15,33 @@ type StatusOption struct {
 func (o StatusOption) String() string { return o.s }
 
 type StatusOptions interface {
-	LocaleCode() string
-	HasLocaleCode() bool
+	Csid() string
+	HasCsid() bool
 	Latitude() float64
 	HasLatitude() bool
+	LocaleCode() string
+	HasLocaleCode() bool
 	Longitude() float64
 	HasLongitude() bool
 	Sid() string
 	HasSid() bool
-	Csid() string
-	HasCsid() bool
 	ToBaseOptions() []BaseOption
 }
 
-func StatusLocaleCode(localeCode string) StatusOption {
+func StatusCsid(csid string) StatusOption {
 	return StatusOption{func(opts *statusOptionImpl) {
-		opts.has_localeCode = true
-		opts.localeCode = localeCode
-	}, fmt.Sprintf("api.StatusLocaleCode(string %+v)}", localeCode)}
+		opts.has_csid = true
+		opts.csid = csid
+	}, fmt.Sprintf("api.StatusCsid(string %+v)}", csid)}
 }
-func StatusLocaleCodeFlag(localeCode *string) StatusOption {
+func StatusCsidFlag(csid *string) StatusOption {
 	return StatusOption{func(opts *statusOptionImpl) {
-		if localeCode == nil {
+		if csid == nil {
 			return
 		}
-		opts.has_localeCode = true
-		opts.localeCode = *localeCode
-	}, fmt.Sprintf("api.StatusLocaleCode(string %+v)}", localeCode)}
+		opts.has_csid = true
+		opts.csid = *csid
+	}, fmt.Sprintf("api.StatusCsid(string %+v)}", csid)}
 }
 
 func StatusLatitude(latitude float64) StatusOption {
@@ -58,6 +58,22 @@ func StatusLatitudeFlag(latitude *float64) StatusOption {
 		opts.has_latitude = true
 		opts.latitude = *latitude
 	}, fmt.Sprintf("api.StatusLatitude(float64 %+v)}", latitude)}
+}
+
+func StatusLocaleCode(localeCode string) StatusOption {
+	return StatusOption{func(opts *statusOptionImpl) {
+		opts.has_localeCode = true
+		opts.localeCode = localeCode
+	}, fmt.Sprintf("api.StatusLocaleCode(string %+v)}", localeCode)}
+}
+func StatusLocaleCodeFlag(localeCode *string) StatusOption {
+	return StatusOption{func(opts *statusOptionImpl) {
+		if localeCode == nil {
+			return
+		}
+		opts.has_localeCode = true
+		opts.localeCode = *localeCode
+	}, fmt.Sprintf("api.StatusLocaleCode(string %+v)}", localeCode)}
 }
 
 func StatusLongitude(longitude float64) StatusOption {
@@ -92,22 +108,6 @@ func StatusSidFlag(sid *string) StatusOption {
 	}, fmt.Sprintf("api.StatusSid(string %+v)}", sid)}
 }
 
-func StatusCsid(csid string) StatusOption {
-	return StatusOption{func(opts *statusOptionImpl) {
-		opts.has_csid = true
-		opts.csid = csid
-	}, fmt.Sprintf("api.StatusCsid(string %+v)}", csid)}
-}
-func StatusCsidFlag(csid *string) StatusOption {
-	return StatusOption{func(opts *statusOptionImpl) {
-		if csid == nil {
-			return
-		}
-		opts.has_csid = true
-		opts.csid = *csid
-	}, fmt.Sprintf("api.StatusCsid(string %+v)}", csid)}
-}
-
 type statusOptionImpl struct {
 	localeCode     string
 	has_localeCode bool
@@ -121,32 +121,32 @@ type statusOptionImpl struct {
 	has_csid       bool
 }
 
-func (s *statusOptionImpl) LocaleCode() string  { return or.String(s.localeCode, "en") }
-func (s *statusOptionImpl) HasLocaleCode() bool { return s.has_localeCode }
+func (s *statusOptionImpl) Csid() string        { return s.csid }
+func (s *statusOptionImpl) HasCsid() bool       { return s.has_csid }
 func (s *statusOptionImpl) Latitude() float64   { return or.Float64(s.latitude, 40.7701286) }
 func (s *statusOptionImpl) HasLatitude() bool   { return s.has_latitude }
+func (s *statusOptionImpl) LocaleCode() string  { return or.String(s.localeCode, "en") }
+func (s *statusOptionImpl) HasLocaleCode() bool { return s.has_localeCode }
 func (s *statusOptionImpl) Longitude() float64  { return or.Float64(s.longitude, -73.9829762) }
 func (s *statusOptionImpl) HasLongitude() bool  { return s.has_longitude }
 func (s *statusOptionImpl) Sid() string         { return s.sid }
 func (s *statusOptionImpl) HasSid() bool        { return s.has_sid }
-func (s *statusOptionImpl) Csid() string        { return s.csid }
-func (s *statusOptionImpl) HasCsid() bool       { return s.has_csid }
 
 type StatusParams struct {
-	LocaleCode string  `json:"locale_code" default:"\"en\""`
+	Csid       string  `json:"csid"`
 	Latitude   float64 `json:"latitude" default:"40.7701286"`
+	LocaleCode string  `json:"locale_code" default:"\"en\""`
 	Longitude  float64 `json:"longitude" default:"-73.9829762"`
 	Sid        string  `json:"sid"`
-	Csid       string  `json:"csid"`
 }
 
 func (o StatusParams) Options() []StatusOption {
 	return []StatusOption{
-		StatusLocaleCode(o.LocaleCode),
+		StatusCsid(o.Csid),
 		StatusLatitude(o.Latitude),
+		StatusLocaleCode(o.LocaleCode),
 		StatusLongitude(o.Longitude),
 		StatusSid(o.Sid),
-		StatusCsid(o.Csid),
 	}
 }
 

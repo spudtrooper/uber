@@ -11,27 +11,11 @@ type UserOption struct {
 func (o UserOption) String() string { return o.s }
 
 type UserOptions interface {
-	Sid() string
-	HasSid() bool
 	Csid() string
 	HasCsid() bool
+	Sid() string
+	HasSid() bool
 	ToBaseOptions() []BaseOption
-}
-
-func UserSid(sid string) UserOption {
-	return UserOption{func(opts *userOptionImpl) {
-		opts.has_sid = true
-		opts.sid = sid
-	}, fmt.Sprintf("api.UserSid(string %+v)}", sid)}
-}
-func UserSidFlag(sid *string) UserOption {
-	return UserOption{func(opts *userOptionImpl) {
-		if sid == nil {
-			return
-		}
-		opts.has_sid = true
-		opts.sid = *sid
-	}, fmt.Sprintf("api.UserSid(string %+v)}", sid)}
 }
 
 func UserCsid(csid string) UserOption {
@@ -50,6 +34,22 @@ func UserCsidFlag(csid *string) UserOption {
 	}, fmt.Sprintf("api.UserCsid(string %+v)}", csid)}
 }
 
+func UserSid(sid string) UserOption {
+	return UserOption{func(opts *userOptionImpl) {
+		opts.has_sid = true
+		opts.sid = sid
+	}, fmt.Sprintf("api.UserSid(string %+v)}", sid)}
+}
+func UserSidFlag(sid *string) UserOption {
+	return UserOption{func(opts *userOptionImpl) {
+		if sid == nil {
+			return
+		}
+		opts.has_sid = true
+		opts.sid = *sid
+	}, fmt.Sprintf("api.UserSid(string %+v)}", sid)}
+}
+
 type userOptionImpl struct {
 	sid      string
 	has_sid  bool
@@ -57,28 +57,28 @@ type userOptionImpl struct {
 	has_csid bool
 }
 
-func (u *userOptionImpl) Sid() string   { return u.sid }
-func (u *userOptionImpl) HasSid() bool  { return u.has_sid }
 func (u *userOptionImpl) Csid() string  { return u.csid }
 func (u *userOptionImpl) HasCsid() bool { return u.has_csid }
+func (u *userOptionImpl) Sid() string   { return u.sid }
+func (u *userOptionImpl) HasSid() bool  { return u.has_sid }
 
 type UserParams struct {
-	Sid  string `json:"sid"`
 	Csid string `json:"csid"`
+	Sid  string `json:"sid"`
 }
 
 func (o UserParams) Options() []UserOption {
 	return []UserOption{
-		UserSid(o.Sid),
 		UserCsid(o.Csid),
+		UserSid(o.Sid),
 	}
 }
 
 // ToBaseOptions converts UserOption to an array of BaseOption
 func (o *userOptionImpl) ToBaseOptions() []BaseOption {
 	return []BaseOption{
-		BaseSid(o.Sid()),
 		BaseCsid(o.Csid()),
+		BaseSid(o.Sid()),
 	}
 }
 

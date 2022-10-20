@@ -108,16 +108,16 @@ func TripsToTimeFlag(toTime *time.Time) TripsOption {
 }
 
 type tripsOptionImpl struct {
+	csid         string
+	has_csid     bool
 	cursor       string
 	has_cursor   bool
 	fromTime     time.Time
 	has_fromTime bool
-	toTime       time.Time
-	has_toTime   bool
 	sid          string
 	has_sid      bool
-	csid         string
-	has_csid     bool
+	toTime       time.Time
+	has_toTime   bool
 }
 
 func (t *tripsOptionImpl) Csid() string        { return t.csid }

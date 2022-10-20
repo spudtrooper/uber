@@ -50,10 +50,10 @@ func BaseSidFlag(sid *string) BaseOption {
 }
 
 type baseOptionImpl struct {
-	sid      string
-	has_sid  bool
 	csid     string
 	has_csid bool
+	sid      string
+	has_sid  bool
 }
 
 func (b *baseOptionImpl) Csid() string  { return b.csid }

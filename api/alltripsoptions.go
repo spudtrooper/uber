@@ -28,8 +28,8 @@ type AllTripsOptions interface {
 	HasToTime() bool
 	TotalLimit() int
 	HasTotalLimit() bool
-	ToTripsOptions() []TripsOption
 	ToBaseOptions() []BaseOption
+	ToTripsOptions() []TripsOption
 }
 
 func AllTripsCsid(csid string) AllTripsOption {
@@ -145,20 +145,20 @@ func AllTripsTotalLimitFlag(totalLimit *int) AllTripsOption {
 }
 
 type allTripsOptionImpl struct {
-	debug          bool
-	has_debug      bool
-	totalLimit     int
-	has_totalLimit bool
-	cursor         string
-	has_cursor     bool
-	fromTime       time.Time
-	has_fromTime   bool
-	toTime         time.Time
-	has_toTime     bool
-	sid            string
-	has_sid        bool
 	csid           string
 	has_csid       bool
+	cursor         string
+	has_cursor     bool
+	debug          bool
+	has_debug      bool
+	fromTime       time.Time
+	has_fromTime   bool
+	sid            string
+	has_sid        bool
+	toTime         time.Time
+	has_toTime     bool
+	totalLimit     int
+	has_totalLimit bool
 }
 
 func (a *allTripsOptionImpl) Csid() string        { return a.csid }
@@ -198,22 +198,22 @@ func (o AllTripsParams) Options() []AllTripsOption {
 	}
 }
 
-// ToTripsOptions converts AllTripsOption to an array of TripsOption
-func (o *allTripsOptionImpl) ToTripsOptions() []TripsOption {
-	return []TripsOption{
-		TripsCsid(o.Csid()),
-		TripsCursor(o.Cursor()),
-		TripsFromTime(o.FromTime()),
-		TripsToTime(o.ToTime()),
-		TripsSid(o.Sid()),
-	}
-}
-
 // ToBaseOptions converts AllTripsOption to an array of BaseOption
 func (o *allTripsOptionImpl) ToBaseOptions() []BaseOption {
 	return []BaseOption{
-		BaseSid(o.Sid()),
 		BaseCsid(o.Csid()),
+		BaseSid(o.Sid()),
+	}
+}
+
+// ToTripsOptions converts AllTripsOption to an array of TripsOption
+func (o *allTripsOptionImpl) ToTripsOptions() []TripsOption {
+	return []TripsOption{
+		TripsFromTime(o.FromTime()),
+		TripsToTime(o.ToTime()),
+		TripsSid(o.Sid()),
+		TripsCsid(o.Csid()),
+		TripsCursor(o.Cursor()),
 	}
 }
 

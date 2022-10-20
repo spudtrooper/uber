@@ -109,16 +109,16 @@ func StatusSidFlag(sid *string) StatusOption {
 }
 
 type statusOptionImpl struct {
-	localeCode     string
-	has_localeCode bool
+	csid           string
+	has_csid       bool
 	latitude       float64
 	has_latitude   bool
+	localeCode     string
+	has_localeCode bool
 	longitude      float64
 	has_longitude  bool
 	sid            string
 	has_sid        bool
-	csid           string
-	has_csid       bool
 }
 
 func (s *statusOptionImpl) Csid() string        { return s.csid }

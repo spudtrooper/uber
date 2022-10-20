@@ -51,10 +51,10 @@ func UserSidFlag(sid *string) UserOption {
 }
 
 type userOptionImpl struct {
-	sid      string
-	has_sid  bool
 	csid     string
 	has_csid bool
+	sid      string
+	has_sid  bool
 }
 
 func (u *userOptionImpl) Csid() string  { return u.csid }
@@ -77,8 +77,8 @@ func (o UserParams) Options() []UserOption {
 // ToBaseOptions converts UserOption to an array of BaseOption
 func (o *userOptionImpl) ToBaseOptions() []BaseOption {
 	return []BaseOption{
-		BaseSid(o.Sid()),
 		BaseCsid(o.Csid()),
+		BaseSid(o.Sid()),
 	}
 }
 

@@ -29,8 +29,8 @@ type AllTripsBatchOptions interface {
 	TotalLimit() int
 	HasTotalLimit() bool
 	ToAllTripsOptions() []AllTripsOption
-	ToTripsOptions() []TripsOption
 	ToBaseOptions() []BaseOption
+	ToTripsOptions() []TripsOption
 }
 
 func AllTripsBatchCsid(csid string) AllTripsBatchOption {
@@ -146,20 +146,20 @@ func AllTripsBatchTotalLimitFlag(totalLimit *int) AllTripsBatchOption {
 }
 
 type allTripsBatchOptionImpl struct {
-	debug          bool
-	has_debug      bool
-	totalLimit     int
-	has_totalLimit bool
-	cursor         string
-	has_cursor     bool
-	fromTime       time.Time
-	has_fromTime   bool
-	toTime         time.Time
-	has_toTime     bool
-	sid            string
-	has_sid        bool
 	csid           string
 	has_csid       bool
+	cursor         string
+	has_cursor     bool
+	debug          bool
+	has_debug      bool
+	fromTime       time.Time
+	has_fromTime   bool
+	sid            string
+	has_sid        bool
+	toTime         time.Time
+	has_toTime     bool
+	totalLimit     int
+	has_totalLimit bool
 }
 
 func (a *allTripsBatchOptionImpl) Csid() string        { return a.csid }
@@ -202,32 +202,32 @@ func (o AllTripsBatchParams) Options() []AllTripsBatchOption {
 // ToAllTripsOptions converts AllTripsBatchOption to an array of AllTripsOption
 func (o *allTripsBatchOptionImpl) ToAllTripsOptions() []AllTripsOption {
 	return []AllTripsOption{
+		AllTripsCursor(o.Cursor()),
+		AllTripsFromTime(o.FromTime()),
+		AllTripsToTime(o.ToTime()),
 		AllTripsSid(o.Sid()),
 		AllTripsCsid(o.Csid()),
 		AllTripsDebug(o.Debug()),
 		AllTripsTotalLimit(o.TotalLimit()),
-		AllTripsCursor(o.Cursor()),
-		AllTripsFromTime(o.FromTime()),
-		AllTripsToTime(o.ToTime()),
-	}
-}
-
-// ToTripsOptions converts AllTripsBatchOption to an array of TripsOption
-func (o *allTripsBatchOptionImpl) ToTripsOptions() []TripsOption {
-	return []TripsOption{
-		TripsCsid(o.Csid()),
-		TripsCursor(o.Cursor()),
-		TripsFromTime(o.FromTime()),
-		TripsToTime(o.ToTime()),
-		TripsSid(o.Sid()),
 	}
 }
 
 // ToBaseOptions converts AllTripsBatchOption to an array of BaseOption
 func (o *allTripsBatchOptionImpl) ToBaseOptions() []BaseOption {
 	return []BaseOption{
-		BaseSid(o.Sid()),
 		BaseCsid(o.Csid()),
+		BaseSid(o.Sid()),
+	}
+}
+
+// ToTripsOptions converts AllTripsBatchOption to an array of TripsOption
+func (o *allTripsBatchOptionImpl) ToTripsOptions() []TripsOption {
+	return []TripsOption{
+		TripsCursor(o.Cursor()),
+		TripsFromTime(o.FromTime()),
+		TripsToTime(o.ToTime()),
+		TripsSid(o.Sid()),
+		TripsCsid(o.Csid()),
 	}
 }
 

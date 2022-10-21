@@ -202,13 +202,13 @@ func (o AllTripsBatchParams) Options() []AllTripsBatchOption {
 // ToAllTripsOptions converts AllTripsBatchOption to an array of AllTripsOption
 func (o *allTripsBatchOptionImpl) ToAllTripsOptions() []AllTripsOption {
 	return []AllTripsOption{
-		AllTripsSid(o.Sid()),
 		AllTripsCsid(o.Csid()),
-		AllTripsDebug(o.Debug()),
-		AllTripsTotalLimit(o.TotalLimit()),
 		AllTripsCursor(o.Cursor()),
+		AllTripsDebug(o.Debug()),
 		AllTripsFromTime(o.FromTime()),
+		AllTripsSid(o.Sid()),
 		AllTripsToTime(o.ToTime()),
+		AllTripsTotalLimit(o.TotalLimit()),
 	}
 }
 
@@ -223,11 +223,11 @@ func (o *allTripsBatchOptionImpl) ToBaseOptions() []BaseOption {
 // ToTripsOptions converts AllTripsBatchOption to an array of TripsOption
 func (o *allTripsBatchOptionImpl) ToTripsOptions() []TripsOption {
 	return []TripsOption{
+		TripsCsid(o.Csid()),
 		TripsCursor(o.Cursor()),
 		TripsFromTime(o.FromTime()),
-		TripsToTime(o.ToTime()),
 		TripsSid(o.Sid()),
-		TripsCsid(o.Csid()),
+		TripsToTime(o.ToTime()),
 	}
 }
 

@@ -77,8 +77,8 @@ func (o UserParams) Options() []UserOption {
 // ToBaseOptions converts UserOption to an array of BaseOption
 func (o *userOptionImpl) ToBaseOptions() []BaseOption {
 	return []BaseOption{
-		BaseSid(o.Sid()),
 		BaseCsid(o.Csid()),
+		BaseSid(o.Sid()),
 	}
 }
 

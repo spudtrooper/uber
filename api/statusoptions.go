@@ -153,8 +153,8 @@ func (o StatusParams) Options() []StatusOption {
 // ToBaseOptions converts StatusOption to an array of BaseOption
 func (o *statusOptionImpl) ToBaseOptions() []BaseOption {
 	return []BaseOption{
-		BaseSid(o.Sid()),
 		BaseCsid(o.Csid()),
+		BaseSid(o.Sid()),
 	}
 }
 

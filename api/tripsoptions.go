@@ -152,8 +152,8 @@ func (o TripsParams) Options() []TripsOption {
 // ToBaseOptions converts TripsOption to an array of BaseOption
 func (o *tripsOptionImpl) ToBaseOptions() []BaseOption {
 	return []BaseOption{
-		BaseSid(o.Sid()),
 		BaseCsid(o.Csid()),
+		BaseSid(o.Sid()),
 	}
 }
 

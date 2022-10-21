@@ -223,11 +223,11 @@ func (o *allTripsBatchOptionImpl) ToBaseOptions() []BaseOption {
 // ToTripsOptions converts AllTripsBatchOption to an array of TripsOption
 func (o *allTripsBatchOptionImpl) ToTripsOptions() []TripsOption {
 	return []TripsOption{
-		TripsCsid(o.Csid()),
 		TripsCursor(o.Cursor()),
 		TripsFromTime(o.FromTime()),
 		TripsToTime(o.ToTime()),
 		TripsSid(o.Sid()),
+		TripsCsid(o.Csid()),
 	}
 }
 

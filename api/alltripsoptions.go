@@ -209,11 +209,11 @@ func (o *allTripsOptionImpl) ToBaseOptions() []BaseOption {
 // ToTripsOptions converts AllTripsOption to an array of TripsOption
 func (o *allTripsOptionImpl) ToTripsOptions() []TripsOption {
 	return []TripsOption{
-		TripsFromTime(o.FromTime()),
-		TripsToTime(o.ToTime()),
 		TripsSid(o.Sid()),
 		TripsCsid(o.Csid()),
 		TripsCursor(o.Cursor()),
+		TripsFromTime(o.FromTime()),
+		TripsToTime(o.ToTime()),
 	}
 }
 

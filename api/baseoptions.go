@@ -21,7 +21,7 @@ func BaseCsid(csid string) BaseOption {
 	return BaseOption{func(opts *baseOptionImpl) {
 		opts.has_csid = true
 		opts.csid = csid
-	}, fmt.Sprintf("api.BaseCsid(string %+v)}", csid)}
+	}, fmt.Sprintf("api.BaseCsid(string %+v)", csid)}
 }
 func BaseCsidFlag(csid *string) BaseOption {
 	return BaseOption{func(opts *baseOptionImpl) {
@@ -30,14 +30,14 @@ func BaseCsidFlag(csid *string) BaseOption {
 		}
 		opts.has_csid = true
 		opts.csid = *csid
-	}, fmt.Sprintf("api.BaseCsid(string %+v)}", csid)}
+	}, fmt.Sprintf("api.BaseCsid(string %+v)", csid)}
 }
 
 func BaseSid(sid string) BaseOption {
 	return BaseOption{func(opts *baseOptionImpl) {
 		opts.has_sid = true
 		opts.sid = sid
-	}, fmt.Sprintf("api.BaseSid(string %+v)}", sid)}
+	}, fmt.Sprintf("api.BaseSid(string %+v)", sid)}
 }
 func BaseSidFlag(sid *string) BaseOption {
 	return BaseOption{func(opts *baseOptionImpl) {
@@ -46,7 +46,7 @@ func BaseSidFlag(sid *string) BaseOption {
 		}
 		opts.has_sid = true
 		opts.sid = *sid
-	}, fmt.Sprintf("api.BaseSid(string %+v)}", sid)}
+	}, fmt.Sprintf("api.BaseSid(string %+v)", sid)}
 }
 
 type baseOptionImpl struct {

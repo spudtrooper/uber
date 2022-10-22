@@ -22,7 +22,7 @@ func UserCsid(csid string) UserOption {
 	return UserOption{func(opts *userOptionImpl) {
 		opts.has_csid = true
 		opts.csid = csid
-	}, fmt.Sprintf("api.UserCsid(string %+v)}", csid)}
+	}, fmt.Sprintf("api.UserCsid(string %+v)", csid)}
 }
 func UserCsidFlag(csid *string) UserOption {
 	return UserOption{func(opts *userOptionImpl) {
@@ -31,14 +31,14 @@ func UserCsidFlag(csid *string) UserOption {
 		}
 		opts.has_csid = true
 		opts.csid = *csid
-	}, fmt.Sprintf("api.UserCsid(string %+v)}", csid)}
+	}, fmt.Sprintf("api.UserCsid(string %+v)", csid)}
 }
 
 func UserSid(sid string) UserOption {
 	return UserOption{func(opts *userOptionImpl) {
 		opts.has_sid = true
 		opts.sid = sid
-	}, fmt.Sprintf("api.UserSid(string %+v)}", sid)}
+	}, fmt.Sprintf("api.UserSid(string %+v)", sid)}
 }
 func UserSidFlag(sid *string) UserOption {
 	return UserOption{func(opts *userOptionImpl) {
@@ -47,7 +47,7 @@ func UserSidFlag(sid *string) UserOption {
 		}
 		opts.has_sid = true
 		opts.sid = *sid
-	}, fmt.Sprintf("api.UserSid(string %+v)}", sid)}
+	}, fmt.Sprintf("api.UserSid(string %+v)", sid)}
 }
 
 type userOptionImpl struct {

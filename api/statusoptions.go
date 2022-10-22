@@ -32,7 +32,7 @@ func StatusCsid(csid string) StatusOption {
 	return StatusOption{func(opts *statusOptionImpl) {
 		opts.has_csid = true
 		opts.csid = csid
-	}, fmt.Sprintf("api.StatusCsid(string %+v)}", csid)}
+	}, fmt.Sprintf("api.StatusCsid(string %+v)", csid)}
 }
 func StatusCsidFlag(csid *string) StatusOption {
 	return StatusOption{func(opts *statusOptionImpl) {
@@ -41,14 +41,14 @@ func StatusCsidFlag(csid *string) StatusOption {
 		}
 		opts.has_csid = true
 		opts.csid = *csid
-	}, fmt.Sprintf("api.StatusCsid(string %+v)}", csid)}
+	}, fmt.Sprintf("api.StatusCsid(string %+v)", csid)}
 }
 
 func StatusLatitude(latitude float64) StatusOption {
 	return StatusOption{func(opts *statusOptionImpl) {
 		opts.has_latitude = true
 		opts.latitude = latitude
-	}, fmt.Sprintf("api.StatusLatitude(float64 %+v)}", latitude)}
+	}, fmt.Sprintf("api.StatusLatitude(float64 %+v)", latitude)}
 }
 func StatusLatitudeFlag(latitude *float64) StatusOption {
 	return StatusOption{func(opts *statusOptionImpl) {
@@ -57,14 +57,14 @@ func StatusLatitudeFlag(latitude *float64) StatusOption {
 		}
 		opts.has_latitude = true
 		opts.latitude = *latitude
-	}, fmt.Sprintf("api.StatusLatitude(float64 %+v)}", latitude)}
+	}, fmt.Sprintf("api.StatusLatitude(float64 %+v)", latitude)}
 }
 
 func StatusLocaleCode(localeCode string) StatusOption {
 	return StatusOption{func(opts *statusOptionImpl) {
 		opts.has_localeCode = true
 		opts.localeCode = localeCode
-	}, fmt.Sprintf("api.StatusLocaleCode(string %+v)}", localeCode)}
+	}, fmt.Sprintf("api.StatusLocaleCode(string %+v)", localeCode)}
 }
 func StatusLocaleCodeFlag(localeCode *string) StatusOption {
 	return StatusOption{func(opts *statusOptionImpl) {
@@ -73,14 +73,14 @@ func StatusLocaleCodeFlag(localeCode *string) StatusOption {
 		}
 		opts.has_localeCode = true
 		opts.localeCode = *localeCode
-	}, fmt.Sprintf("api.StatusLocaleCode(string %+v)}", localeCode)}
+	}, fmt.Sprintf("api.StatusLocaleCode(string %+v)", localeCode)}
 }
 
 func StatusLongitude(longitude float64) StatusOption {
 	return StatusOption{func(opts *statusOptionImpl) {
 		opts.has_longitude = true
 		opts.longitude = longitude
-	}, fmt.Sprintf("api.StatusLongitude(float64 %+v)}", longitude)}
+	}, fmt.Sprintf("api.StatusLongitude(float64 %+v)", longitude)}
 }
 func StatusLongitudeFlag(longitude *float64) StatusOption {
 	return StatusOption{func(opts *statusOptionImpl) {
@@ -89,14 +89,14 @@ func StatusLongitudeFlag(longitude *float64) StatusOption {
 		}
 		opts.has_longitude = true
 		opts.longitude = *longitude
-	}, fmt.Sprintf("api.StatusLongitude(float64 %+v)}", longitude)}
+	}, fmt.Sprintf("api.StatusLongitude(float64 %+v)", longitude)}
 }
 
 func StatusSid(sid string) StatusOption {
 	return StatusOption{func(opts *statusOptionImpl) {
 		opts.has_sid = true
 		opts.sid = sid
-	}, fmt.Sprintf("api.StatusSid(string %+v)}", sid)}
+	}, fmt.Sprintf("api.StatusSid(string %+v)", sid)}
 }
 func StatusSidFlag(sid *string) StatusOption {
 	return StatusOption{func(opts *statusOptionImpl) {
@@ -105,7 +105,7 @@ func StatusSidFlag(sid *string) StatusOption {
 		}
 		opts.has_sid = true
 		opts.sid = *sid
-	}, fmt.Sprintf("api.StatusSid(string %+v)}", sid)}
+	}, fmt.Sprintf("api.StatusSid(string %+v)", sid)}
 }
 
 type statusOptionImpl struct {

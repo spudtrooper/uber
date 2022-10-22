@@ -36,7 +36,7 @@ func AllTripsCsid(csid string) AllTripsOption {
 	return AllTripsOption{func(opts *allTripsOptionImpl) {
 		opts.has_csid = true
 		opts.csid = csid
-	}, fmt.Sprintf("api.AllTripsCsid(string %+v)}", csid)}
+	}, fmt.Sprintf("api.AllTripsCsid(string %+v)", csid)}
 }
 func AllTripsCsidFlag(csid *string) AllTripsOption {
 	return AllTripsOption{func(opts *allTripsOptionImpl) {
@@ -45,14 +45,14 @@ func AllTripsCsidFlag(csid *string) AllTripsOption {
 		}
 		opts.has_csid = true
 		opts.csid = *csid
-	}, fmt.Sprintf("api.AllTripsCsid(string %+v)}", csid)}
+	}, fmt.Sprintf("api.AllTripsCsid(string %+v)", csid)}
 }
 
 func AllTripsCursor(cursor string) AllTripsOption {
 	return AllTripsOption{func(opts *allTripsOptionImpl) {
 		opts.has_cursor = true
 		opts.cursor = cursor
-	}, fmt.Sprintf("api.AllTripsCursor(string %+v)}", cursor)}
+	}, fmt.Sprintf("api.AllTripsCursor(string %+v)", cursor)}
 }
 func AllTripsCursorFlag(cursor *string) AllTripsOption {
 	return AllTripsOption{func(opts *allTripsOptionImpl) {
@@ -61,14 +61,14 @@ func AllTripsCursorFlag(cursor *string) AllTripsOption {
 		}
 		opts.has_cursor = true
 		opts.cursor = *cursor
-	}, fmt.Sprintf("api.AllTripsCursor(string %+v)}", cursor)}
+	}, fmt.Sprintf("api.AllTripsCursor(string %+v)", cursor)}
 }
 
 func AllTripsDebug(debug bool) AllTripsOption {
 	return AllTripsOption{func(opts *allTripsOptionImpl) {
 		opts.has_debug = true
 		opts.debug = debug
-	}, fmt.Sprintf("api.AllTripsDebug(bool %+v)}", debug)}
+	}, fmt.Sprintf("api.AllTripsDebug(bool %+v)", debug)}
 }
 func AllTripsDebugFlag(debug *bool) AllTripsOption {
 	return AllTripsOption{func(opts *allTripsOptionImpl) {
@@ -77,14 +77,14 @@ func AllTripsDebugFlag(debug *bool) AllTripsOption {
 		}
 		opts.has_debug = true
 		opts.debug = *debug
-	}, fmt.Sprintf("api.AllTripsDebug(bool %+v)}", debug)}
+	}, fmt.Sprintf("api.AllTripsDebug(bool %+v)", debug)}
 }
 
 func AllTripsFromTime(fromTime time.Time) AllTripsOption {
 	return AllTripsOption{func(opts *allTripsOptionImpl) {
 		opts.has_fromTime = true
 		opts.fromTime = fromTime
-	}, fmt.Sprintf("api.AllTripsFromTime(time.Time %+v)}", fromTime)}
+	}, fmt.Sprintf("api.AllTripsFromTime(time.Time %+v)", fromTime)}
 }
 func AllTripsFromTimeFlag(fromTime *time.Time) AllTripsOption {
 	return AllTripsOption{func(opts *allTripsOptionImpl) {
@@ -93,14 +93,14 @@ func AllTripsFromTimeFlag(fromTime *time.Time) AllTripsOption {
 		}
 		opts.has_fromTime = true
 		opts.fromTime = *fromTime
-	}, fmt.Sprintf("api.AllTripsFromTime(time.Time %+v)}", fromTime)}
+	}, fmt.Sprintf("api.AllTripsFromTime(time.Time %+v)", fromTime)}
 }
 
 func AllTripsSid(sid string) AllTripsOption {
 	return AllTripsOption{func(opts *allTripsOptionImpl) {
 		opts.has_sid = true
 		opts.sid = sid
-	}, fmt.Sprintf("api.AllTripsSid(string %+v)}", sid)}
+	}, fmt.Sprintf("api.AllTripsSid(string %+v)", sid)}
 }
 func AllTripsSidFlag(sid *string) AllTripsOption {
 	return AllTripsOption{func(opts *allTripsOptionImpl) {
@@ -109,14 +109,14 @@ func AllTripsSidFlag(sid *string) AllTripsOption {
 		}
 		opts.has_sid = true
 		opts.sid = *sid
-	}, fmt.Sprintf("api.AllTripsSid(string %+v)}", sid)}
+	}, fmt.Sprintf("api.AllTripsSid(string %+v)", sid)}
 }
 
 func AllTripsToTime(toTime time.Time) AllTripsOption {
 	return AllTripsOption{func(opts *allTripsOptionImpl) {
 		opts.has_toTime = true
 		opts.toTime = toTime
-	}, fmt.Sprintf("api.AllTripsToTime(time.Time %+v)}", toTime)}
+	}, fmt.Sprintf("api.AllTripsToTime(time.Time %+v)", toTime)}
 }
 func AllTripsToTimeFlag(toTime *time.Time) AllTripsOption {
 	return AllTripsOption{func(opts *allTripsOptionImpl) {
@@ -125,14 +125,14 @@ func AllTripsToTimeFlag(toTime *time.Time) AllTripsOption {
 		}
 		opts.has_toTime = true
 		opts.toTime = *toTime
-	}, fmt.Sprintf("api.AllTripsToTime(time.Time %+v)}", toTime)}
+	}, fmt.Sprintf("api.AllTripsToTime(time.Time %+v)", toTime)}
 }
 
 func AllTripsTotalLimit(totalLimit int) AllTripsOption {
 	return AllTripsOption{func(opts *allTripsOptionImpl) {
 		opts.has_totalLimit = true
 		opts.totalLimit = totalLimit
-	}, fmt.Sprintf("api.AllTripsTotalLimit(int %+v)}", totalLimit)}
+	}, fmt.Sprintf("api.AllTripsTotalLimit(int %+v)", totalLimit)}
 }
 func AllTripsTotalLimitFlag(totalLimit *int) AllTripsOption {
 	return AllTripsOption{func(opts *allTripsOptionImpl) {
@@ -141,7 +141,7 @@ func AllTripsTotalLimitFlag(totalLimit *int) AllTripsOption {
 		}
 		opts.has_totalLimit = true
 		opts.totalLimit = *totalLimit
-	}, fmt.Sprintf("api.AllTripsTotalLimit(int %+v)}", totalLimit)}
+	}, fmt.Sprintf("api.AllTripsTotalLimit(int %+v)", totalLimit)}
 }
 
 type allTripsOptionImpl struct {

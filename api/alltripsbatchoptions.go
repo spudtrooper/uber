@@ -37,7 +37,7 @@ func AllTripsBatchCsid(csid string) AllTripsBatchOption {
 	return AllTripsBatchOption{func(opts *allTripsBatchOptionImpl) {
 		opts.has_csid = true
 		opts.csid = csid
-	}, fmt.Sprintf("api.AllTripsBatchCsid(string %+v)}", csid)}
+	}, fmt.Sprintf("api.AllTripsBatchCsid(string %+v)", csid)}
 }
 func AllTripsBatchCsidFlag(csid *string) AllTripsBatchOption {
 	return AllTripsBatchOption{func(opts *allTripsBatchOptionImpl) {
@@ -46,14 +46,14 @@ func AllTripsBatchCsidFlag(csid *string) AllTripsBatchOption {
 		}
 		opts.has_csid = true
 		opts.csid = *csid
-	}, fmt.Sprintf("api.AllTripsBatchCsid(string %+v)}", csid)}
+	}, fmt.Sprintf("api.AllTripsBatchCsid(string %+v)", csid)}
 }
 
 func AllTripsBatchCursor(cursor string) AllTripsBatchOption {
 	return AllTripsBatchOption{func(opts *allTripsBatchOptionImpl) {
 		opts.has_cursor = true
 		opts.cursor = cursor
-	}, fmt.Sprintf("api.AllTripsBatchCursor(string %+v)}", cursor)}
+	}, fmt.Sprintf("api.AllTripsBatchCursor(string %+v)", cursor)}
 }
 func AllTripsBatchCursorFlag(cursor *string) AllTripsBatchOption {
 	return AllTripsBatchOption{func(opts *allTripsBatchOptionImpl) {
@@ -62,14 +62,14 @@ func AllTripsBatchCursorFlag(cursor *string) AllTripsBatchOption {
 		}
 		opts.has_cursor = true
 		opts.cursor = *cursor
-	}, fmt.Sprintf("api.AllTripsBatchCursor(string %+v)}", cursor)}
+	}, fmt.Sprintf("api.AllTripsBatchCursor(string %+v)", cursor)}
 }
 
 func AllTripsBatchDebug(debug bool) AllTripsBatchOption {
 	return AllTripsBatchOption{func(opts *allTripsBatchOptionImpl) {
 		opts.has_debug = true
 		opts.debug = debug
-	}, fmt.Sprintf("api.AllTripsBatchDebug(bool %+v)}", debug)}
+	}, fmt.Sprintf("api.AllTripsBatchDebug(bool %+v)", debug)}
 }
 func AllTripsBatchDebugFlag(debug *bool) AllTripsBatchOption {
 	return AllTripsBatchOption{func(opts *allTripsBatchOptionImpl) {
@@ -78,14 +78,14 @@ func AllTripsBatchDebugFlag(debug *bool) AllTripsBatchOption {
 		}
 		opts.has_debug = true
 		opts.debug = *debug
-	}, fmt.Sprintf("api.AllTripsBatchDebug(bool %+v)}", debug)}
+	}, fmt.Sprintf("api.AllTripsBatchDebug(bool %+v)", debug)}
 }
 
 func AllTripsBatchFromTime(fromTime time.Time) AllTripsBatchOption {
 	return AllTripsBatchOption{func(opts *allTripsBatchOptionImpl) {
 		opts.has_fromTime = true
 		opts.fromTime = fromTime
-	}, fmt.Sprintf("api.AllTripsBatchFromTime(time.Time %+v)}", fromTime)}
+	}, fmt.Sprintf("api.AllTripsBatchFromTime(time.Time %+v)", fromTime)}
 }
 func AllTripsBatchFromTimeFlag(fromTime *time.Time) AllTripsBatchOption {
 	return AllTripsBatchOption{func(opts *allTripsBatchOptionImpl) {
@@ -94,14 +94,14 @@ func AllTripsBatchFromTimeFlag(fromTime *time.Time) AllTripsBatchOption {
 		}
 		opts.has_fromTime = true
 		opts.fromTime = *fromTime
-	}, fmt.Sprintf("api.AllTripsBatchFromTime(time.Time %+v)}", fromTime)}
+	}, fmt.Sprintf("api.AllTripsBatchFromTime(time.Time %+v)", fromTime)}
 }
 
 func AllTripsBatchSid(sid string) AllTripsBatchOption {
 	return AllTripsBatchOption{func(opts *allTripsBatchOptionImpl) {
 		opts.has_sid = true
 		opts.sid = sid
-	}, fmt.Sprintf("api.AllTripsBatchSid(string %+v)}", sid)}
+	}, fmt.Sprintf("api.AllTripsBatchSid(string %+v)", sid)}
 }
 func AllTripsBatchSidFlag(sid *string) AllTripsBatchOption {
 	return AllTripsBatchOption{func(opts *allTripsBatchOptionImpl) {
@@ -110,14 +110,14 @@ func AllTripsBatchSidFlag(sid *string) AllTripsBatchOption {
 		}
 		opts.has_sid = true
 		opts.sid = *sid
-	}, fmt.Sprintf("api.AllTripsBatchSid(string %+v)}", sid)}
+	}, fmt.Sprintf("api.AllTripsBatchSid(string %+v)", sid)}
 }
 
 func AllTripsBatchToTime(toTime time.Time) AllTripsBatchOption {
 	return AllTripsBatchOption{func(opts *allTripsBatchOptionImpl) {
 		opts.has_toTime = true
 		opts.toTime = toTime
-	}, fmt.Sprintf("api.AllTripsBatchToTime(time.Time %+v)}", toTime)}
+	}, fmt.Sprintf("api.AllTripsBatchToTime(time.Time %+v)", toTime)}
 }
 func AllTripsBatchToTimeFlag(toTime *time.Time) AllTripsBatchOption {
 	return AllTripsBatchOption{func(opts *allTripsBatchOptionImpl) {
@@ -126,14 +126,14 @@ func AllTripsBatchToTimeFlag(toTime *time.Time) AllTripsBatchOption {
 		}
 		opts.has_toTime = true
 		opts.toTime = *toTime
-	}, fmt.Sprintf("api.AllTripsBatchToTime(time.Time %+v)}", toTime)}
+	}, fmt.Sprintf("api.AllTripsBatchToTime(time.Time %+v)", toTime)}
 }
 
 func AllTripsBatchTotalLimit(totalLimit int) AllTripsBatchOption {
 	return AllTripsBatchOption{func(opts *allTripsBatchOptionImpl) {
 		opts.has_totalLimit = true
 		opts.totalLimit = totalLimit
-	}, fmt.Sprintf("api.AllTripsBatchTotalLimit(int %+v)}", totalLimit)}
+	}, fmt.Sprintf("api.AllTripsBatchTotalLimit(int %+v)", totalLimit)}
 }
 func AllTripsBatchTotalLimitFlag(totalLimit *int) AllTripsBatchOption {
 	return AllTripsBatchOption{func(opts *allTripsBatchOptionImpl) {
@@ -142,7 +142,7 @@ func AllTripsBatchTotalLimitFlag(totalLimit *int) AllTripsBatchOption {
 		}
 		opts.has_totalLimit = true
 		opts.totalLimit = *totalLimit
-	}, fmt.Sprintf("api.AllTripsBatchTotalLimit(int %+v)}", totalLimit)}
+	}, fmt.Sprintf("api.AllTripsBatchTotalLimit(int %+v)", totalLimit)}
 }
 
 type allTripsBatchOptionImpl struct {

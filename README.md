@@ -6,7 +6,7 @@ A uber.com API for go.
 
 ### Deployed frontend
 
-https://api-dumpster-fire.herokuapp.com/
+https://api-dumpster-fire.herokuapp.com/uber
 
 ### Running local front end
 

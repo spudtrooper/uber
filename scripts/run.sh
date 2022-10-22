@@ -4,6 +4,8 @@
 #
 set -e
 
+SCRIPTS="$(dirname "$0")"
+
 go generate ./...
-go mod tidy
-go run main.go "$@"
+
+$SCRIPTS/just_run.sh "$@"

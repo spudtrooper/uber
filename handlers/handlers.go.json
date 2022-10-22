@@ -7,6 +7,13 @@
     }
   },
   {
+    "Handler": "FareEstimate",
+    "Loc": {
+      "uri": "github.com/spudtrooper/uber/blob/main/handlers/handlers.go",
+      "line": 59
+    }
+  },
+  {
     "Handler": "Status",
     "Loc": {
       "uri": "github.com/spudtrooper/uber/blob/main/handlers/handlers.go",

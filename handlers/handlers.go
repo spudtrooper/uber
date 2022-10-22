@@ -56,5 +56,14 @@ func CreateHandlers(client *api.Client) []handler.Handler {
 		handler.NewHandlerRenderer(render.AllTripsBatch),
 	)
 
+	b.NewHandler("FareEstimate",
+		func(ctx context.Context, ip any) (any, error) {
+			p := ip.(api.FareEstimateParams)
+			return client.FareEstimate(p.Options()...)
+		},
+		api.FareEstimateParams{},
+		handler.NewHandlerExtraRequiredFields([]string{"sid", "csid"}),
+	)
+
 	return b.Build()
 }
